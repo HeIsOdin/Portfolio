@@ -1,40 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benjamin Adedowole - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Icon -->
+    <link rel="icon" href="assets/logo.gif" />
 
-<script src="script.js"></script>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Benjamin's Portfolio</title>
+  </head>
+  <body>
     <header>
-        <h1>Benjamin Adedowole</h1>
-        <p>Computer Information Systems & Cybersecurity Enthusiast</p>
-    </header>
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Passionate about technology, cybersecurity, and building innovative solutions.</p>
-    </section>
-    <section id="projects">
-        <h2>Projects</h2>
-        <ul>
-            <li><a href="#">Project 1</a></li>
-            <li><a href="#">Project 2</a></li>
-            <li><a href="#">Project 3</a></li>
-        </ul>
-    </section>
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-        <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
-    </section>
-    <footer>
-        <p>&copy; 2025 Benjamin Adedowole</p>
-    </footer>
-    <script>
+      <div class="logo">
+        <img src="assets/logo.gif" alt="logo" />
+        <a href="/">Benjamin</a>
+      </div>
 
+      <nav>
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#skill">Skill</a>
+        <a href="#project">Project</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="extra-nav">
+        <button>Get In Touch</button>
+      </div>
+
+      <div id="menu" class="hamburger-menu">
+        <svg
+          width="35px"
+          height="35px"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4 18L20 18"
+            stroke="#ffffff"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M4 12L20 12"
+            stroke="#ffffff"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M4 6L20 6"
+            stroke="#ffffff"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
+
+      <!-- Mobile Nav -->
+      <div id="nav-mobile" class="mobile-nav">
+        <div id="close-mobile" class="close">
+          <svg
+            width="800px"
+            height="800px"
+            viewBox="0 0 32 32"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <style>
+                .cls-1 {
+                  fill: none;
+                  stroke: #ffffff;
+                  stroke-linecap: round;
+                  stroke-linejoin: round;
+                  stroke-width: 2px;
+                }
+              </style>
+            </defs>
+
+            <g id="cross">
+              <line class="cls-1" x1="7" x2="25" y1="7" y2="25" />
+              <line class="cls-1" x1="7" x2="25" y1="25" y2="7" />
+            </g>
+          </svg>
+        </div>
+        <ul>
+          <li><a class="nav-link" href="#">Home</a></li>
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#skill">Skill</a></li>
+          <li><a class="nav-link" href="#project">Project</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="content">
+          <svg viewBox="0 0 1500 500" data-aos="fade-down">
+            <text x="50%" y="50%" text-anchor="middle">BENJAMIN</text>
+          </svg>
+          <h1 data-aos="zoom-in-up">
+            Building Secure & Scalable Software That <span>Stands Out</span>
+          </h1>
+          <button data-aos="zoom-out" onclick="location.href='#project'"><span>View My Work</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
+        <div class="content">
+          <h1 data-aos="zoom-in-down" data-aos-delay="300" class="title">
+            About Me
+          </h1>
+          <div class="about-me">
+            <div data-aos="zoom-out-right" data-aos-delay="300" class="profile">
+              <div class="image-box">
+                <img src="assets/profile.jpg" alt="Profile picture of Benjamin" />
+              </div>
+            </div>
+
+            <div
+              data-aos="zoom-in-left"
+              data-aos-delay="300"
+              class="description"
+            >
+              <div class="name-role">
+                <h1>Benjamin Adedowole</h1>
+                <div class="role">
+                  <h2>Cybersecurity & Software Developer</h2>
+                </div>
+              </div>
+              <p>
+                I am a Computer Science and Cyber Operations student at Dakota State University. Beyond academics, I actively participate in cybersecurity competitions such as the US Cyber Games, MetaCTF, HackTheBox University CTF, and TryHackMe’s Advent of Cyber. 
+                <br /><br />
+                I’ve built projects ranging from <strong>PyPikachu</strong>, an AI-powered Pokémon card defect detection pipeline, to <strong>Clash of Prodigies</strong>, a STEM competition platform for high school students in Nigeria. I also maintain a collection of Discord bots and have developed a terminal-based game suite in C using ncurses. 
+                <br /><br />
+                My passion lies in combining secure development practices with creative problem solving to deliver solutions that scale.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skill" class="skill">
+      <div class="container">
+        <div class="content">
+          <h1 data-aos="zoom-in-down" data-aos-delay="300" class="title">
+            Skills
+          </h1>
+
+          <div class="skills" data-aos-delay="500">
+            <div data-aos="zoom-in-down" class="skill-box">
+              <img src="assets/icon/html5.svg" alt="HTML5" />
+            </div>
+            <div data-aos="zoom-in-down" class="skill-box">
+              <img src="assets/icon/tailwind.svg" alt="Tailwind CSS" />
+            </div>
+            <div data-aos="zoom-in-down" class="skill-box">
+              <img src="assets/icon/javascript.svg" alt="JavaScript" />
+            </div>
+            <div data-aos="zoom-in-down" class="skill-box">
+              <img src="assets/icon/react.svg" alt="React" />
+            </div>
+            <div data-aos="zoom-in-down" class="skill-box">
+              <img src="assets/icon/postgresql.svg" alt="PostgreSQL" />
+            </div>
+            <div data-aos="zoom-in-down" class="skill-box">
+              <img src="assets/icon/github.svg" alt="GitHub" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="project" class="project">
+      <div class="container">
+        <div class="content">
+          <h1 data-aos="zoom-in-down" data-aos-delay="300" class="title">
+            Projects
+          </h1>
+
+          <div class="projects">
+            <div data-aos="zoom-in-down" data-aos-delay="300" class="card">
+              <img src="assets/Pikachu.jpg" alt="PyPikachu project screenshot" />
+              <div class="description">
+                <h1>PyPikachu</h1>
+                <p>
+                  An AI-powered Pokémon card defect detection pipeline using YOLO models and Kaggle datasets.
+                </p>
+                <div class="action">
+                  <button onclick="window.open('https://github.com/HeIsOdin/Pokemon', '_blank')">Github</button>
+                  <button onclick="window.open('https://heisodin.github.io/Pokemon', '_blank')">Demo</button>
+                </div>
+              </div>
+            </div>
+
+            <div data-aos="zoom-in-down" data-aos-delay="400" class="card">
+              <img src="assets/project.png" alt="Clash of Prodigies project screenshot" />
+              <div class="description">
+                <h1>Clash of Prodigies</h1>
+                <p>
+                  A STEM competition platform for Nigerian high schools with real-time features, built using React and Mantine.
+                </p>
+                <div class="action">
+                  <button>Github</button>
+                  <button>Demo</button>
+                </div>
+              </div>
+            </div>
+
+            <div data-aos="zoom-in-down" data-aos-delay="500" class="card">
+              <img src="assets/project.png" alt="Discord bots project screenshot" />
+              <div class="description">
+                <h1>Discord Bots Collection</h1>
+                <p>
+                  A set of six Discord bots using Python, SQL, NumPy, Pandas, OAuth, and FFMpeg for automation and entertainment.
+                </p>
+                <div class="action">
+                  <button>Github</button>
+                  <button>Demo</button>
+                </div>
+              </div>
+            </div>
+
+            <div data-aos="zoom-in-down" data-aos-delay="600" class="card">
+              <img src="assets/project.png" alt="GameBox project screenshot" />
+              <div class="description">
+                <h1>GameBox</h1>
+                <p>
+                  A terminal-based C/ncurses environment hosting multiple games including Tic-Tac-Toe and Snake Xenzia.
+                </p>
+                <div class="action">
+                  <button>Github</button>
+                  <button>Demo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="content">
+          <h1 data-aos="zoom-in-down" data-aos-delay="300" class="title">
+            Contact
+          </h1>
+
+          <form data-aos="zoom-in-down" action="https://formspree.io/f/mnngpkeo" method="post" target="_blank" data-aos-delay="300" class="contact-form">
+            <div class="input">
+              <input type="text" placeholder="Name..." />
+              <input type="email" placeholder="Email..." />
+              <input type="number" placeholder="Phone..." />
+              <input type="text" placeholder="Subject..." />
+            </div>
+            <textarea name="message" placeholder="Message..."></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div data-aos="fade-up" data-aos-duration="1000" class="container">
+        <div class="profile">
+          <div class="logo">
+            <img src="assets/logo.png" alt="logo" />
+            <a href="">Benjamin</a>
+          </div>
+
+          <!-- Short About -->
+          <p>
+            Portfolio of Benjamin Adedowole — Cybersecurity & Software Developer passionate about building secure, scalable, and creative solutions.
+          </p>
+
+          <!-- Social Media -->
+          <div class="social-media-container">
+            <div class="social-media">
+              <box-icon color="#fff" type="logo" name="instagram"></box-icon>
+            </div>
+            <div class="social-media">
+              <box-icon color="#fff" name="youtube" type="logo"></box-icon>
+            </div>
+            <div class="social-media">
+              <box-icon color="#fff" name="facebook-circle" type="logo"></box-icon>
+            </div>
+            <div class="social-media">
+              <box-icon color="#fff" type="logo" name="tiktok"></box-icon>
+            </div>
+          </div>
+        </div>
+
+        <div class="link-container">
+          <div class="information">
+            <h1>Skills</h1>
+            <ul>
+              <li><a href="#">C / C++</a></li>
+              <li><a href="#">Python</a></li>
+              <li><a href="#">JavaScript</a></li>
+              <li><a href="#">Go</a></li>
+              <li><a href="#">Java</a></li>
+            </ul>
+          </div>
+
+          <div class="resource">
+            <h1>Technologies</h1>
+            <ul>
+              <li><a href="#">Git</a></li>
+              <li><a href="#">Docker</a></li>
+              <li><a href="#">Kubernetes</a></li>
+              <li><a href="#">Azure</a></li>
+              <li><a href="#">PostgreSQL</a></li>
+            </ul>
+          </div>
+
+          <div class="navigation">
+            <h1>Navigation</h1>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#skill">Skill</a></li>
+              <li><a href="#project">Project</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- Box Icon -->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
     </script>
-</body>
+  </body>
 </html>
