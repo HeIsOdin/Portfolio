@@ -37,7 +37,16 @@ export const about = {
 export const projects = [
   {
     name: 'PyPikachu',
+    fileName: 'PyPikachu_CV',
+    kind: 'Computer Vision Project',
+    size: 'ML / CV pipeline',
     tag: 'Computer Vision / ML',
+    created: 'Spring 2025',
+    modified: 'Recently updated',
+    status: 'Active prototype',
+    dimensions: 'Card ROI + classifier',
+    resolution: '92% reported accuracy',
+    tone: 'vision',
     description:
       'AI-powered Pokémon card defect and misprint detection pipeline using OpenCV, YOLO exploration, and model training workflows.',
     stack: ['Python', 'OpenCV', 'TensorFlow', 'YOLO', 'Flask'],
@@ -48,7 +57,16 @@ export const projects = [
   },
   {
     name: 'Clash of Prodigies',
+    fileName: 'Clash_Prodigies',
+    kind: 'Full-Stack Platform',
+    size: 'React / Node app',
     tag: 'Full-Stack Platform',
+    created: '2025',
+    modified: 'Recently updated',
+    status: 'Production platform',
+    dimensions: 'Competition workflows',
+    resolution: 'Nigerian STEM students',
+    tone: 'platform',
     description:
       'A STEM competition platform for Nigerian high school students with modern React components and real-time competition workflows.',
     stack: ['React', 'Mantine', 'Node.js', 'PostgreSQL'],
@@ -59,7 +77,16 @@ export const projects = [
   },
   {
     name: 'GameBox',
+    fileName: 'GameBox_Terminal',
+    kind: 'Systems Programming Project',
+    size: 'C / ncurses',
     tag: 'Systems Programming',
+    created: '2024',
+    modified: 'Archived',
+    status: 'Completed',
+    dimensions: 'Terminal game suite',
+    resolution: 'Linux CLI',
+    tone: 'systems',
     description:
       'Terminal-based C/ncurses environment hosting multiple games including Tic-Tac-Toe and Snake Xenzia.',
     stack: ['C', 'ncurses', 'Linux'],
