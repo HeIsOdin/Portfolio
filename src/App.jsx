@@ -573,7 +573,6 @@ function ProjectHealthChecks({ project, healthResult }) {
     <section className={`project-info-section project-health project-health-${result.status}`}>
       <div className="project-health-heading">
         <h3>Health Checks</h3>
-        <span>{result.message}</span>
       </div>
       {result.items.length > 0 ? (
         <div className="project-health-list">
