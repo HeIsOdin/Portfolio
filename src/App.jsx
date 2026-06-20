@@ -22,6 +22,31 @@ const initialWindows = {
 };
 
 const menuItems = ['File', 'Edit', 'View', 'Tools', 'Window', 'Help'];
+const imageFilePattern = /\.(png|jpe?g|webp|gif|svg)$/i;
+
+function getProjectTags(project) {
+  return project.tags ?? project.stack ?? [];
+}
+
+function getProjectImageSrc(project) {
+  if (project.image) return project.image;
+  if (project.imageUrl) return project.imageUrl;
+  if (project.previewImage) return project.previewImage;
+  if (project.fileName && imageFilePattern.test(project.fileName)) {
+    return `/assets/projects/${project.fileName}`;
+  }
+  return null;
+}
+
+function getProjectInitials(project) {
+  return project.name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase();
+}
 
 function App() {
   const [windows, setWindows] = useState(initialWindows);
@@ -74,7 +99,7 @@ function App() {
       <MenuBar time={time} onProfileToggle={() => setProfileOpen((value) => !value)} />
 
       <section className="desktop-canvas" aria-label="macOS style portfolio desktop">
-        {profileOpen && <ProfileCard profile={windows.about} showProfile={openApp}/>}
+        {profileOpen && <ProfileCard appWindow={windows.about} showProfile={openApp} />}
 
         {visibleWindows.map((windowItem, index) => (
           <MacWindow
@@ -130,16 +155,16 @@ function AppleLogo({ className = '' }) {
   );
 }
 
-function ProfileCard({ profile,  showProfile }) {
+function ProfileCard({ appWindow, showProfile }) {
   return (
-    <aside className="profile-card-shell" aria-label="Profile summary" onClick={() => showProfile(profile)}>
+    <aside className="profile-card-shell" aria-label="Profile summary" onClick={() => showProfile(appWindow)}>
       <div role="button" tabIndex={0} className="profile-card-glass">
         <div className="profile-card-inner">
           <div className="profile-card-copy">
             <div className="profile-card-name">Benjamin A.</div>
             <div className="profile-card-title">AI/ML and Cybersecurity Student</div>
             <div className="profile-card-links">
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="profile-card-link">
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="profile-card-link" onClick={(event) => event.stopPropagation()}>
                 GitHub
               </a>
             </div>
@@ -267,7 +292,7 @@ function InfoCard({ children }) {
   return <section className="window-card">{children}</section>;
 }
 
-function SkillChips({ items }) {
+function SkillChips({ items = [] }) {
   return (
     <div className="skill-chip-row">
       {items.map((item) => (
@@ -295,34 +320,76 @@ function AboutWindow() {
 }
 
 function ProjectPreview({ project, isThumbnail = false }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const imageSrc = getProjectImageSrc(project);
+  const tags = getProjectTags(project);
+  const hasImage = Boolean(imageSrc && !imageFailed);
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [imageSrc]);
+
   return (
-    <div className={`project-preview project-preview-${project.tone} ${isThumbnail ? 'project-preview-thumb' : ''}`}>
-      <div className="project-preview-toolbar">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="project-preview-body">
-        <div className="project-preview-icon">{project.name.slice(0, 2)}</div>
-        <div className="project-preview-copy">
-          <strong>{project.name}</strong>
-          <span>{project.tag}</span>
-        </div>
-      </div>
-      <div className="project-preview-footer">
-        {project.tags.slice(0, 3).map((item) => (
-          <span key={item}>{item}</span>
-        ))}
-      </div>
+    <div className={`project-preview project-preview-${project.tone ?? 'default'} ${isThumbnail ? 'project-preview-thumb' : ''} ${hasImage ? 'project-preview-has-image' : ''}`}>
+      {hasImage ? (
+        <img
+          src={imageSrc}
+          alt={`${project.name} preview`}
+          className="project-preview-image"
+          loading="lazy"
+          onError={() => setImageFailed(true)}
+        />
+      ) : (
+        <>
+          <div className="project-preview-toolbar">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="project-preview-body">
+            <div className="project-preview-icon">{getProjectInitials(project)}</div>
+            <div className="project-preview-copy">
+              <strong>{project.name}</strong>
+              <span>{project.subtitle ?? project.tag ?? project.kind}</span>
+            </div>
+          </div>
+          <div className="project-preview-footer">
+            {tags.slice(0, 3).map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
 
-function ProjectInfoRow({ label, value }) {
+function ProjectAuthors({ authors = [] }) {
+  return (
+    <div className="project-authors">
+      {authors.map((author) => {
+        const hasLink = author.link && author.link !== '#';
+        return hasLink ? (
+          <a key={author.name} href={author.link} target="_blank" rel="noreferrer" className="project-author-link">
+            {author.name}
+          </a>
+        ) : (
+          <span key={author.name} className="project-author-name">
+            {author.name}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
+function ProjectInfoRow({ label, value, children }) {
   return (
     <div className="project-info-row">
       <span>{label}</span>
-      <strong>{value}</strong>
+      <strong className={children ? 'project-info-value project-info-value-custom' : 'project-info-value'}>
+        {children ?? value ?? '—'}
+      </strong>
     </div>
   );
 }
@@ -330,6 +397,7 @@ function ProjectInfoRow({ label, value }) {
 function ProjectsWindow() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedProject = projects[selectedIndex] ?? projects[0];
+  const selectedTags = getProjectTags(selectedProject);
 
   return (
     <div className="project-gallery-view">
@@ -358,7 +426,7 @@ function ProjectsWindow() {
           <ProjectPreview project={selectedProject} isThumbnail />
           <div>
             <h2>{selectedProject.name}</h2>
-            <p>{selectedProject.subtitle} - {selectedProject.kind}</p>
+            <p>{[selectedProject.subtitle, selectedProject.kind].filter(Boolean).join(' - ')}</p>
           </div>
         </div>
 
@@ -372,12 +440,19 @@ function ProjectsWindow() {
             <h3>Information</h3>
           </div>
           <ProjectInfoRow label="Created" value={selectedProject.created} />
+          {selectedProject.modified && <ProjectInfoRow label="Modified" value={selectedProject.modified} />}
           <ProjectInfoRow label="Stage" value={selectedProject.stage} />
+          <ProjectInfoRow label="Kind" value={selectedProject.kind} />
+          {selectedProject.authors?.length > 0 && (
+            <ProjectInfoRow label="Authors">
+              <ProjectAuthors authors={selectedProject.authors} />
+            </ProjectInfoRow>
+          )}
         </section>
 
         <section className="project-info-section">
           <h3>Tags</h3>
-          <SkillChips items={selectedProject.tags} />
+          <SkillChips items={selectedTags} />
         </section>
 
         {selectedProject.links.length > 0 && (
