@@ -20,6 +20,7 @@ export const dockApps = [
   { id: 'experience', label: 'Experience', icon: '/icons/dock/experience.svg' },
   { id: 'contact', label: 'Contact', icon: '/icons/dock/contact.svg' },
   { id: 'resume', label: 'Resume', icon: '/icons/dock/resume.svg' },
+  { id: 'references', label: 'References', icon: '/icons/dock/references.svg' },
   { id: 'github', label: 'GitHub', icon: '/icons/dock/github.svg', external: 'https://github.com/HeIsOdin' },
 ];
 
@@ -55,7 +56,7 @@ export const projects = [
     name: 'GameBox',
     tag: 'Systems Programming',
     description:
-      'Terminal-based C/ncurses game environment hosting multiple games including Tic-Tac-Toe and Snake Xenzia.',
+      'Terminal-based C/ncurses environment hosting multiple games including Tic-Tac-Toe and Snake Xenzia.',
     stack: ['C', 'ncurses', 'Linux'],
     github: '#',
     demo: '#',
@@ -101,5 +102,20 @@ export const experience = [
     period: 'Ongoing',
     details:
       'Solve challenges across web, crypto, reverse engineering, forensics, OSINT, and binary exploitation.',
+  },
+];
+
+export const references = [
+  {
+    name: 'Professional references',
+    role: 'Available on request',
+    details:
+      'Use this window as a dedicated place for references, recommendations, or mentor contact notes when you are ready to add them.',
+  },
+  {
+    name: 'Academic and project mentors',
+    role: 'Placeholder',
+    details:
+      'Add names, titles, and preferred contact instructions here before sharing the portfolio publicly.',
   },
 ];
