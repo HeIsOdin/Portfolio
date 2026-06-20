@@ -73,7 +73,7 @@ export const projects = [
     tags: ['React', 'Mantine', 'Node.js', 'PostgreSQL'],
     links: [
       { label: 'GitHub', href: 'https://github.com/Clash-of-Prodigies' },
-      { label: 'Website', href: 'https://clashofprodigies.org' },
+      { label: 'Website', href: 'https://app.clashofprodigies.org' },
     ],
   },
   {
