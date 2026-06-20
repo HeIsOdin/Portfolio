@@ -13,7 +13,7 @@ import {
 
 const initialWindows = {
   about: { id: 'about', title: 'About Me', x: 80, y: 36, w: 700, h: 435, minimized: false, maximized: false },
-  projects: { id: 'projects', title: 'Projects', x: 80, y: 36, w: 700, h: 435, minimized: true, maximized: false },
+  projects: { id: 'projects', title: 'Projects', x: 60, y: 36, w: 960, h: 560, minimized: true, maximized: false },
   skills: { id: 'skills', title: 'Skills', x: 80, y: 36, w: 700, h: 435, minimized: true, maximized: false },
   experience: { id: 'experience', title: 'Experience', x: 80, y: 36, w: 650, h: 435, minimized: true, maximized: false },
   contact: { id: 'contact', title: 'Contact', x: 80, y: 36, w: 650, h: 435, minimized: true, maximized: false },
@@ -294,28 +294,110 @@ function AboutWindow() {
   );
 }
 
-function ProjectsWindow() {
+function ProjectPreview({ project, isThumbnail = false }) {
   return (
-    <WindowDocument>
-      <WindowHeading>Projects</WindowHeading>
-      {projects.map((project) => (
-        <InfoCard key={project.name}>
-          <h3 className="window-card-title">{project.name}</h3>
-          <p className="window-card-subtitle">{project.tag}</p>
-          <p className="window-card-text">{project.description}</p>
-          <SkillChips items={project.stack} />
-          {project.links.length > 0 && (
+    <div className={`project-preview project-preview-${project.tone} ${isThumbnail ? 'project-preview-thumb' : ''}`}>
+      <div className="project-preview-toolbar">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="project-preview-body">
+        <div className="project-preview-icon">{project.name.slice(0, 2)}</div>
+        <div className="project-preview-copy">
+          <strong>{project.name}</strong>
+          <span>{project.tag}</span>
+        </div>
+      </div>
+      <div className="project-preview-footer">
+        {project.stack.slice(0, 3).map((item) => (
+          <span key={item}>{item}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProjectInfoRow({ label, value }) {
+  return (
+    <div className="project-info-row">
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
+function ProjectsWindow() {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const selectedProject = projects[selectedIndex] ?? projects[0];
+
+  return (
+    <div className="project-gallery-view">
+      <section className="project-gallery-main" aria-label="Project gallery preview">
+        <div className="project-preview-stage">
+          <ProjectPreview project={selectedProject} />
+        </div>
+
+        <div className="project-filmstrip" aria-label="Project thumbnails">
+          {projects.map((project, index) => (
+            <button
+              key={project.name}
+              type="button"
+              className={`project-thumbnail ${index === selectedIndex ? 'active' : ''}`}
+              onClick={() => setSelectedIndex(index)}
+              aria-label={`Show ${project.name}`}
+            >
+              <ProjectPreview project={project} isThumbnail />
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <aside className="project-inspector" aria-label="Project information">
+        <div className="project-inspector-header">
+          <ProjectPreview project={selectedProject} isThumbnail />
+          <div>
+            <h2>{selectedProject.fileName}</h2>
+            <p>{selectedProject.kind} - {selectedProject.size}</p>
+          </div>
+        </div>
+
+        <section className="project-info-section">
+          <div className="project-info-heading">
+            <h3>Information</h3>
+            <span>Show More</span>
+          </div>
+          <ProjectInfoRow label="Created" value={selectedProject.created} />
+          <ProjectInfoRow label="Modified" value={selectedProject.modified} />
+          <ProjectInfoRow label="Status" value={selectedProject.status} />
+          <ProjectInfoRow label="Dimensions" value={selectedProject.dimensions} />
+          <ProjectInfoRow label="Resolution" value={selectedProject.resolution} />
+        </section>
+
+        <section className="project-info-section">
+          <h3>Summary</h3>
+          <p>{selectedProject.description}</p>
+        </section>
+
+        <section className="project-info-section">
+          <h3>Tags</h3>
+          <SkillChips items={selectedProject.stack} />
+        </section>
+
+        {selectedProject.links.length > 0 && (
+          <section className="project-info-section">
+            <h3>Links</h3>
             <div className="window-link-row">
-              {project.links.map((link) => (
+              {selectedProject.links.map((link) => (
                 <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="window-link">
                   {link.label}
                 </a>
               ))}
             </div>
-          )}
-        </InfoCard>
-      ))}
-    </WindowDocument>
+          </section>
+        )}
+      </aside>
+    </div>
   );
 }
 
