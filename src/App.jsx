@@ -12,7 +12,7 @@ import {
 } from './data/portfolio.js';
 
 const initialWindows = {
-  about: { id: 'about', title: 'About Me', x: 80, y: 36, w: 700, h: 435, minimized: false, maximized: false },
+  about: { id: 'about', title: 'About Me', x: 80, y: 36, w: 700, h: 435, minimized: true, maximized: false },
   projects: { id: 'projects', title: 'Projects', x: 60, y: 36, w: 960, h: 560, minimized: true, maximized: false },
   skills: { id: 'skills', title: 'Skills', x: 80, y: 36, w: 700, h: 435, minimized: true, maximized: false },
   experience: { id: 'experience', title: 'Experience', x: 80, y: 36, w: 650, h: 435, minimized: true, maximized: false },
@@ -74,7 +74,7 @@ function App() {
       <MenuBar time={time} onProfileToggle={() => setProfileOpen((value) => !value)} />
 
       <section className="desktop-canvas" aria-label="macOS style portfolio desktop">
-        {profileOpen && <ProfileCard />}
+        {profileOpen && <ProfileCard profile={windows.about} showProfile={openApp}/>}
 
         {visibleWindows.map((windowItem, index) => (
           <MacWindow
@@ -130,9 +130,9 @@ function AppleLogo({ className = '' }) {
   );
 }
 
-function ProfileCard() {
+function ProfileCard({ profile,  showProfile }) {
   return (
-    <aside className="profile-card-shell" aria-label="Profile summary">
+    <aside className="profile-card-shell" aria-label="Profile summary" onClick={() => showProfile(profile)}>
       <div role="button" tabIndex={0} className="profile-card-glass">
         <div className="profile-card-inner">
           <div className="profile-card-copy">
@@ -212,9 +212,9 @@ function MacWindow({ windowItem, isActive, zIndex, children, onClose, onFocus, o
     >
       <div className="mac-title-bar" onPointerDown={startDrag}>
         <div className="mac-traffic" onPointerDown={(event) => event.stopPropagation()}>
-          <button type="button" className="mac-close-btn" aria-label="Close" onClick={onClose} />
-          <button type="button" className="mac-minimize-btn" aria-label="Minimize" onClick={onMinimize} />
-          <button type="button" className="mac-zoom-btn" aria-label="Zoom" onClick={onMaximize} disabled />
+          <button type="button" className="mac-close-btn" aria-label="Close" onClick={onClose}>x</button>
+          <button type="button" className="mac-minimize-btn" aria-label="Minimize" onClick={onMinimize}>–</button>
+          <button type="button" className="mac-zoom-btn" aria-label="Zoom" onClick={onMaximize} disabled>+</button>
         </div>
         <span className="mac-window-title">{windowItem.title}</span>
       </div>
@@ -287,7 +287,7 @@ function AboutWindow() {
       </div>
 
       <InfoCard>
-        <h3 className="window-card-title">About Me</h3>
+        <h3 className="window-card-title">Hello 👋,</h3>
         <p className="window-card-text multiline-text">{about.paragraphs.join('\n\n')}</p>
       </InfoCard>
     </WindowDocument>

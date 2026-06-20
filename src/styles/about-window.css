@@ -28,6 +28,18 @@
   border-radius: 999px;
   cursor: pointer;
   color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: transparent;
+  line-height: 0.625rem;
+}
+
+.mac-close-btn:hover, .mac-minimize-btn:hover, .mac-zoom-btn:hover {
+  color: white;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
 }
 
 .mac-close-btn {

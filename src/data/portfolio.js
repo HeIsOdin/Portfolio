@@ -16,8 +16,8 @@ export const profile = {
 export const dockApps = [
   { id: 'about', label: 'About', icon: '/icons/dock/about.svg' },
   { id: 'projects', label: 'Projects', icon: '/icons/dock/projects.svg' },
-  { id: 'skills', label: 'Skills', icon: '/icons/dock/skills.svg' },
   { id: 'experience', label: 'Experience', icon: '/icons/dock/experience.svg' },
+  { id: 'skills', label: 'Skills', icon: '/icons/dock/skills.svg' },
   { id: 'contact', label: 'Contact', icon: '/icons/dock/contact.svg' },
   { id: 'education', label: 'Education', icon: '/icons/dock/resume.svg' },
   { id: 'references', label: 'References', icon: '/icons/dock/references.svg' },
