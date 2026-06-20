@@ -52,6 +52,116 @@ function isGitHubProjectLink(link) {
   return /github/i.test(link.label ?? '') || /github\.com/i.test(link.href ?? '');
 }
 
+function getProjectLiveLink(project) {
+  return (project.links ?? []).find((link) => link?.href && link.href !== '#' && !isGitHubProjectLink(link));
+}
+
+function getProjectHealthEndpoint(project) {
+  if (project.healthEndpoint) return project.healthEndpoint;
+  if (project.healthUrl) return project.healthUrl;
+
+  const liveLink = getProjectLiveLink(project);
+  if (!liveLink) return null;
+  if (liveLink.healthEndpoint) return liveLink.healthEndpoint;
+  if (liveLink.healthUrl) return liveLink.healthUrl;
+
+  try {
+    const url = new URL(liveLink.href);
+    url.pathname = `${url.pathname.replace(/\/$/, '')}/health`;
+    url.search = '';
+    url.hash = '';
+    return url.toString();
+  } catch {
+    return `${liveLink.href.replace(/\/$/, '')}/health`;
+  }
+}
+
+function hasHealthResponseShape(data) {
+  return Boolean(data && Array.isArray(data.checklist) && Array.isArray(data.checks));
+}
+
+async function fetchProjectHealth(endpoint, signal) {
+  try {
+    const response = await fetch(endpoint, {
+      cache: 'no-store',
+      headers: { Accept: 'application/json' },
+      signal,
+    });
+
+    const responseText = await response.text();
+    let data = null;
+
+    try {
+      data = responseText ? JSON.parse(responseText) : null;
+    } catch {
+      data = null;
+    }
+
+    const hasExpectedShape = hasHealthResponseShape(data);
+
+    if (response.status === 404 && !hasExpectedShape) {
+      return {
+        status: 'down',
+        message: 'Project is currently down',
+        endpoint,
+        items: [],
+      };
+    }
+
+    if (!hasExpectedShape) {
+      return {
+        status: 'unknown',
+        message: response.ok
+          ? 'Health endpoint did not return checklist/checks data.'
+          : `Unable to determine project health. Endpoint returned ${response.status}.`,
+        endpoint,
+        items: [],
+      };
+    }
+
+    const checklist = data.checklist.map((item) => String(item));
+    const checks = data.checks.map((check) => {
+      if (check === true) return true;
+      if (check === false) return false;
+      return null;
+    });
+
+    const items = checklist.map((label, index) => ({
+      label,
+      value: checks[index] ?? null,
+    }));
+
+    let status = 'healthy';
+    let message = 'All checks passed';
+
+    if (checks.some((check) => check === false)) {
+      status = 'failing';
+      message = 'Some checks failed';
+    } else if (checks.some((check) => check === null) || checklist.length === 0) {
+      status = 'unknown';
+      message = 'Unable to determine every check';
+    }
+
+    return {
+      status,
+      message,
+      endpoint,
+      items,
+    };
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      return null;
+    }
+
+    return {
+      status: 'unknown',
+      message: 'Unable to determine project health',
+      endpoint,
+      items: [],
+    };
+  }
+}
+
 function App() {
   const [windows, setWindows] = useState(initialWindows);
   const [activeWindow, setActiveWindow] = useState('about');
@@ -421,10 +531,15 @@ function ProjectAuthors({ authors = [] }) {
   return (
     <div className="project-authors">
       {authors.map((author) => {
-        return (
+        const hasLink = author.link && author.link !== '#';
+        return hasLink ? (
           <a key={author.name} href={author.link} target="_blank" rel="noreferrer" className="project-author-link">
             {author.name}
           </a>
+        ) : (
+          <span key={author.name} className="project-author-name">
+            {author.name}
+          </span>
         );
       })}
     </div>
@@ -442,10 +557,90 @@ function ProjectInfoRow({ label, value, children }) {
   );
 }
 
+function ProjectHealthChecks({ project, healthResult }) {
+  const endpoint = getProjectHealthEndpoint(project);
+
+  if (!endpoint) return null;
+
+  const result = healthResult ?? {
+    status: 'loading',
+    message: 'Checking project health…',
+    endpoint,
+    items: [],
+  };
+
+  return (
+    <section className={`project-info-section project-health project-health-${result.status}`}>
+      <div className="project-health-heading">
+        <h3>Health Checks</h3>
+        <span>{result.message}</span>
+      </div>
+      {result.items.length > 0 ? (
+        <div className="project-health-list">
+          {result.items.map((item) => {
+            const checkClass = item.value === true ? 'pass' : item.value === false ? 'fail' : 'unknown';
+            const checkLabel = item.value === true ? 'Passed' : item.value === false ? 'Failed' : 'Unknown';
+
+            return (
+              <div className={`project-health-row project-health-row-${checkClass}`} key={item.label}>
+                <span>{item.label}</span>
+                <strong>{checkLabel}</strong>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <p className="project-health-message">{result.message}</p>
+      )}
+    </section>
+  );
+}
+
 function ProjectsWindow() {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [healthResults, setHealthResults] = useState({});
   const selectedProject = projects[selectedIndex] ?? projects[0];
   const selectedTags = getProjectTags(selectedProject);
+
+  useEffect(() => {
+    const projectsWithHealth = projects
+      .map((project) => ({ project, endpoint: getProjectHealthEndpoint(project) }))
+      .filter(({ endpoint }) => Boolean(endpoint));
+
+    if (projectsWithHealth.length === 0) return undefined;
+
+    const controller = new AbortController();
+
+    setHealthResults((current) => {
+      const next = { ...current };
+      projectsWithHealth.forEach(({ project, endpoint }) => {
+        next[project.name] = next[project.name] ?? {
+          status: 'loading',
+          message: 'Checking project health…',
+          endpoint,
+          items: [],
+        };
+      });
+      return next;
+    });
+
+    Promise.all(
+      projectsWithHealth.map(async ({ project, endpoint }) => {
+        const result = await fetchProjectHealth(endpoint, controller.signal);
+        return result ? [project.name, result] : null;
+      }),
+    ).then((entries) => {
+      setHealthResults((current) => {
+        const next = { ...current };
+        entries.filter(Boolean).forEach(([projectName, result]) => {
+          next[projectName] = result;
+        });
+        return next;
+      });
+    });
+
+    return () => controller.abort();
+  }, []);
 
   return (
     <WindowDocument>
@@ -500,6 +695,8 @@ function ProjectsWindow() {
               </ProjectInfoRow>
             )}
           </section>
+
+          <ProjectHealthChecks project={selectedProject} healthResult={healthResults[selectedProject.name]} />
         </aside>
       </div>
     </WindowDocument>
