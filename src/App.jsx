@@ -11,7 +11,7 @@ const initialWindows = {
   references: { id: 'references', title: 'References', x: 450, y: 118, w: 540, h: 420, minimized: true, maximized: false },
 };
 
-const menuItems = ['Finder', 'File', 'Edit', 'View', 'Window', 'Help'];
+const menuItems = ['File', 'Edit', 'View', 'Tools', 'Window', 'Help'];
 
 function App() {
   const [windows, setWindows] = useState(initialWindows);
@@ -134,11 +134,8 @@ function AppleLogo({ className = '' }) {
 function ProfileCard() {
   return (
     <aside className="profile-card" aria-label="Profile summary">
-      <div className="profile-avatar">BA</div>
-      <div>
         <p className="profile-name">{profile.name}</p>
         <p className="profile-role">{profile.role}</p>
-      </div>
       <div className="profile-status">
         <span />
         {profile.status}

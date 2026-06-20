@@ -19,9 +19,9 @@ export const dockApps = [
   { id: 'skills', label: 'Skills', icon: '/icons/dock/skills.svg' },
   { id: 'experience', label: 'Experience', icon: '/icons/dock/experience.svg' },
   { id: 'contact', label: 'Contact', icon: '/icons/dock/contact.svg' },
-  { id: 'resume', label: 'Resume', icon: '/icons/dock/resume.svg' },
+  { id: 'resume', label: 'Education', icon: '/icons/dock/resume.svg' },
   { id: 'references', label: 'References', icon: '/icons/dock/references.svg' },
-  { id: 'github', label: 'GitHub', icon: '/icons/dock/github.svg', external: 'https://github.com/HeIsOdin' },
+  { id: 'games', label: 'Games', icon: '/icons/dock/games.svg' },
 ];
 
 export const projects = [
