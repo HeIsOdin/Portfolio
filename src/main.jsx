@@ -5,6 +5,7 @@ import './styles/index.css';
 import './styles/macos-overrides.css';
 import './styles/about-window.css';
 import './styles/project-gallery.css';
+import './styles/project-gallery-media.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
