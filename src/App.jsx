@@ -130,6 +130,7 @@ function ProfileCard() {
     <aside className="profile-card-shell" aria-label="Profile summary">
       <div role="button" tabIndex={0} className="profile-card-glass">
         <div className="profile-card-inner">
+          <div className="profile-card-avatar" aria-hidden="true">BA</div>
           <div className="profile-card-copy">
             <div className="profile-card-name">Benjamin A.</div>
             <div className="profile-card-title">AI/ML and Cybersecurity Student</div>
