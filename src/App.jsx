@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { dockApps, experience, profile, projects, skills } from './data/portfolio.js';
+import { dockApps, experience, profile, projects, references, skills } from './data/portfolio.js';
 
 const initialWindows = {
   about: { id: 'about', title: 'About Benjamin', x: 80, y: 74, w: 560, h: 440, minimized: false, maximized: false },
@@ -8,6 +8,7 @@ const initialWindows = {
   experience: { id: 'experience', title: 'Experience', x: 330, y: 130, w: 570, h: 450, minimized: true, maximized: false },
   contact: { id: 'contact', title: 'Contact', x: 420, y: 150, w: 500, h: 390, minimized: true, maximized: false },
   resume: { id: 'resume', title: 'Resume', x: 360, y: 106, w: 540, h: 420, minimized: true, maximized: false },
+  references: { id: 'references', title: 'References', x: 450, y: 118, w: 540, h: 420, minimized: true, maximized: false },
 };
 
 const menuItems = ['Finder', 'File', 'Edit', 'View', 'Window', 'Help'];
@@ -225,6 +226,7 @@ function WindowContent({ id }) {
   if (id === 'experience') return <ExperienceWindow />;
   if (id === 'contact') return <ContactWindow />;
   if (id === 'resume') return <ResumeWindow />;
+  if (id === 'references') return <ReferencesWindow />;
   return null;
 }
 
@@ -300,6 +302,27 @@ function ExperienceWindow() {
               <p>{item.period}</p>
               <h3>{item.role}</h3>
               <h4>{item.company}</h4>
+              <p>{item.details}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ReferencesWindow() {
+  return (
+    <section className="window-section">
+      <p className="eyebrow">References</p>
+      <h2>References</h2>
+      <div className="timeline">
+        {references.map((item) => (
+          <article key={item.name}>
+            <span className="timeline-dot" />
+            <div>
+              <h3>{item.name}</h3>
+              <h4>{item.role}</h4>
               <p>{item.details}</p>
             </div>
           </article>
