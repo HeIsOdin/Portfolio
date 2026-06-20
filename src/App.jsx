@@ -421,15 +421,10 @@ function ProjectAuthors({ authors = [] }) {
   return (
     <div className="project-authors">
       {authors.map((author) => {
-        const hasLink = author.link && author.link !== '#';
-        return hasLink ? (
+        return (
           <a key={author.name} href={author.link} target="_blank" rel="noreferrer" className="project-author-link">
             {author.name}
           </a>
-        ) : (
-          <span key={author.name} className="project-author-name">
-            {author.name}
-          </span>
         );
       })}
     </div>
@@ -499,7 +494,6 @@ function ProjectsWindow() {
             </div>
             <ProjectInfoRow label="Created" value={selectedProject.created} />
             <ProjectInfoRow label="Stage" value={selectedProject.stage} />
-            <ProjectInfoRow label="Kind" value={selectedProject.kind} />
             {selectedProject.authors?.length > 0 && (
               <ProjectInfoRow label="Authors">
                 <ProjectAuthors authors={selectedProject.authors} />

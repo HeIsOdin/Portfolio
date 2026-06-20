@@ -3,10 +3,10 @@ export const profile = {
   shortName: 'Benjamin',
   role: 'AI/ML and Cybersecurity Student',
   status: 'Available for internship opportunities and collaborations',
-  location: 'Dakota State University',
+  location: 'Dakota State University, Madison, South Dakota',
   email: 'benjaminadedowole@gmail.com',
   github: 'https://github.com/HeIsOdin',
-  linkedin: '#',
+  linkedin: 'https://linkedin.com/in/benjamin-ade/',
   resume: '#',
   headline: 'Building secure, scalable, and creative software experiences.',
   summary:
@@ -73,7 +73,7 @@ export const projects = [
     tags: ['React', 'Mantine', 'Node.js', 'PostgreSQL'],
     links: [
       { label: 'GitHub', href: 'https://github.com/Clash-of-Prodigies' },
-      { label: 'Website', href: 'https://clashofprodigies.com' },
+      { label: 'Website', href: 'https://clashofprodigies.org' },
     ],
   },
   {
@@ -90,11 +90,17 @@ export const projects = [
     {
       name: 'Muhammad Essa',
       link: '#'
+    },
+    {
+      name: 'Ethan Weyer',
+      link: '#'
     }],
     description:
       'Terminal-based C/ncurses environment hosting multiple games including Tic-Tac-Toe and Snake Xenzia.',
     tags: ['C', 'ncurses', 'Linux'],
-    links: [],
+    links: [
+      { label: 'GitHub', href: 'https://github.com/K3RN4LP4N1C/Danger-Dash' },
+    ],
   },
 ];
 
@@ -160,7 +166,7 @@ export const experience = [
 export const contactSections = [
   {
     title: 'Location',
-    body: 'Dakota State University',
+    body: profile.location,
   },
   {
     title: 'Email',
@@ -168,12 +174,16 @@ export const contactSections = [
   },
   {
     title: 'GitHub',
-    link: { label: 'github.com/HeIsOdin', href: 'https://github.com/HeIsOdin' },
+    link: { label: 'HeIsOdin', href: profile.github },
   },
   {
     title: 'LinkedIn',
-    link: { label: 'LinkedIn profile', href: '#' },
+    link: { label: 'Benjamin Ade', href: profile.linkedin },
   },
+  {
+    title: 'Discord',
+    link: { label: 'heisodin', href: 'https://discordapp.com/users/heisodin' },
+  }
 ];
 
 export const educationSections = [
@@ -183,7 +193,7 @@ export const educationSections = [
       {
         title: 'Dakota State University',
         subtitle: 'Computer Science and Cyber Operations',
-        meta: 'Current student',
+        meta: 'Current student - 4.0 CGPA',
       },
     ],
   },
