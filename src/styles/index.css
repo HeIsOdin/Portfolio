@@ -258,6 +258,13 @@ button {
   height: 12px;
   border-radius: 999px;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: white;
+  line-height: 0.625rem;
 }
 
 .traffic-lights .close { background: #ff5f57; }
@@ -269,17 +276,6 @@ button {
   min-height: 0;
   overflow: auto;
   padding: clamp(18px, 3vw, 28px);
-}
-
-.mac-window-pane::-webkit-scrollbar {
-  width: 10px;
-}
-
-.mac-window-pane::-webkit-scrollbar-thumb {
-  border: 3px solid transparent;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.24);
-  background-clip: padding-box;
 }
 
 .window-section h2,

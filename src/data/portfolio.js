@@ -21,7 +21,6 @@ export const dockApps = [
   { id: 'contact', label: 'Contact', icon: '/icons/dock/contact.svg' },
   { id: 'resume', label: 'Education', icon: '/icons/dock/resume.svg' },
   { id: 'references', label: 'References', icon: '/icons/dock/references.svg' },
-  { id: 'games', label: 'Games', icon: '/icons/dock/games.svg' },
 ];
 
 export const projects = [
@@ -32,7 +31,7 @@ export const projects = [
       'AI-powered Pokémon card defect and misprint detection pipeline using OpenCV, YOLO exploration, and model training workflows.',
     stack: ['Python', 'OpenCV', 'TensorFlow', 'YOLO', 'Flask'],
     github: 'https://github.com/HeIsOdin/Pokemon',
-    demo: 'https://heisodin.github.io/Pokemon',
+    demo: 'https://pypikachu.oluwajuwon.dev',
   },
   {
     name: 'Clash of Prodigies',
@@ -40,17 +39,8 @@ export const projects = [
     description:
       'A STEM competition platform for Nigerian high school students with modern React components and real-time competition workflows.',
     stack: ['React', 'Mantine', 'Node.js', 'PostgreSQL'],
-    github: '#',
-    demo: '#',
-  },
-  {
-    name: 'Cerberus Auth Service',
-    tag: 'Security Engineering',
-    description:
-      'Authentication and database service architecture using JWTs, PostgreSQL roles, refresh tokens, OTP tables, and secure API boundaries.',
-    stack: ['Node.js', 'Express', 'PostgreSQL', 'Docker', 'JWT'],
-    github: '#',
-    demo: '#',
+    github: 'https://github.com/Clash-of-Prodigies',
+    demo: 'https://clashofprodigies.com',
   },
   {
     name: 'GameBox',

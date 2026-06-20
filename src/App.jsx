@@ -209,9 +209,9 @@ function MacWindow({ windowItem, isActive, zIndex, children, onClose, onFocus, o
     >
       <div className="mac-title-bar" onPointerDown={startDrag}>
         <div className="mac-traffic" onPointerDown={(event) => event.stopPropagation()}>
-          <button type="button" className="mac-close-btn" aria-label="Close" onClick={onClose} />
-          <button type="button" className="mac-minimize-btn" aria-label="Minimize" onClick={onMinimize} />
-          <button type="button" className="mac-zoom-btn" aria-label="Zoom" onClick={onMaximize} disabled />
+          <button type="button" className="mac-close-btn" aria-label="Close" onClick={onClose}>x</button>
+          <button type="button" className="mac-minimize-btn" aria-label="Minimize" onClick={onMinimize}>-</button>
+          <button type="button" className="mac-zoom-btn" aria-label="Zoom" onClick={onMaximize} disabled={windowItem.maximized}>{windowItem.maximized ? '🗗' : '+'}</button>
         </div>
         <span className="mac-window-title">{windowItem.title}</span>
       </div>
