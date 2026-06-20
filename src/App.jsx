@@ -69,12 +69,6 @@ function App() {
       <MenuBar time={time} onProfileToggle={() => setProfileOpen((value) => !value)} />
 
       <section className="desktop-canvas" aria-label="macOS style portfolio desktop">
-        <div className="desktop-intro">
-          <p className="eyebrow">{profile.role}</p>
-          <h1>{profile.shortName}'s Portfolio</h1>
-          <p>{profile.headline}</p>
-        </div>
-
         {profileOpen && <ProfileCard />}
 
         {visibleWindows.map((windowItem, index) => (
