@@ -115,7 +115,6 @@ function MenuBar({ time, onProfileToggle }) {
         ))}
       </div>
       <button className="menu-status" type="button" onClick={onProfileToggle}>
-        <AppleLogo className="menu-status-logo" />
         <span className="hide-on-small">{formattedDate}</span>
         <span>{formattedTime}</span>
       </button>
