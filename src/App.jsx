@@ -134,34 +134,17 @@ function AppleLogo({ className = '' }) {
 function ProfileCard() {
   return (
     <aside className="profile-card-shell" aria-label="Profile summary">
-      <div
-        role="button"
-        tabIndex={0}
-        className="overflow-hidden overflow-y-auto rounded-xl border border-white/20 bg-white/10 backdrop-blur-xl cursor-pointer transition-opacity hover:bg-white/15 hover:border-white/30 active:opacity-90"
-        style={{
-          boxShadow:
-            'rgba(0, 0, 0, 0.2) 0px 8px 24px, rgba(255, 255, 255, 0.15) 0px 1px 0px inset',
-        }}
-      >
-        <div className="flex gap-2 p-2 sm:gap-2.5 sm:p-2.5">
-          <div className="min-w-0 flex-1">
-            <div className="font-semibold text-[12px] leading-tight text-white truncate drop-shadow-sm sm:text-[13px]">
-              Benjamin A.
-            </div>
-            <div className="text-[10px] leading-tight text-white/75 truncate mt-0.5 sm:text-[11px]">
-              AI/ML and Cybersecurity Student
-            </div>
-            <div className="mt-1 flex flex-wrap gap-x-1.5 gap-y-0.5 sm:mt-1.5 sm:gap-x-2">
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] text-amber-200 hover:text-amber-100 hover:underline sm:text-[11px]"
-              >
+      <div role="button" tabIndex={0} className="profile-card-glass">
+        <div className="profile-card-inner">
+          <div className="profile-card-copy">
+            <div className="profile-card-name">Benjamin A.</div>
+            <div className="profile-card-title">AI/ML and Cybersecurity Student</div>
+            <div className="profile-card-links">
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="profile-card-link">
                 GitHub
               </a>
             </div>
-            <div className="text-[9px] text-white/55 mt-0.5 sm:mt-1 sm:text-[10px]">
+            <div className="profile-card-note">
               Available for internship opportunities and collaborations
             </div>
           </div>
