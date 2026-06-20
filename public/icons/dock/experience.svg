@@ -1,6 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="14" fill="#7D7D80"></rect>
-  <path fill="#8E8E93" d="M10 26h44v28H10z"></path>
-  <path fill="#6B6B6E" d="M10 26h44v6H10z"></path>
-  <path d="M26 26V20a6 6 0 0 1 12 0v6" stroke="#5C5C5E" stroke-width="2" fill="transparent"></path>
+  <defs>
+    <linearGradient id="exp-bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#9DADAE"/>
+      <stop offset="50%" stop-color="#88999A"/>
+      <stop offset="100%" stop-color="#7A8B8C"/>
+    </linearGradient>
+    <linearGradient id="exp-shine" x1="0.5" y1="0" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.28)"/>
+      <stop offset="45%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#exp-bg)"/>
+  <rect width="64" height="64" rx="14" fill="url(#exp-shine)"/>
+  <path fill="rgba(255,255,255,0.98)" d="M14 24h36v28H14V24z"/>
+  <path fill="rgba(255,255,255,0.85)" d="M14 24h36v6H14v-6z"/>
+  <path fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round" d="M28 24V18a4 4 0 018 0v6"/>
 </svg>
