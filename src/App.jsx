@@ -48,6 +48,10 @@ function getProjectInitials(project) {
     .toUpperCase();
 }
 
+function isGitHubProjectLink(link) {
+  return /github/i.test(link.label ?? '') || /github\.com/i.test(link.href ?? '');
+}
+
 function App() {
   const [windows, setWindows] = useState(initialWindows);
   const [activeWindow, setActiveWindow] = useState('about');
@@ -348,7 +352,6 @@ function ProjectPreview({ project, isThumbnail = false }) {
           </div>
           <div className="project-preview-body">
             <div className="project-preview-icon">{getProjectInitials(project)}</div>
-
           </div>
           <div className="project-preview-footer">
             {tags.slice(0, 3).map((item) => (
@@ -361,14 +364,72 @@ function ProjectPreview({ project, isThumbnail = false }) {
   );
 }
 
+function GitHubIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        fill="currentColor"
+        d="M12 2C6.48 2 2 6.59 2 12.25c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.36 1.12 2.94.86.09-.67.35-1.12.64-1.38-2.22-.26-4.55-1.14-4.55-5.05 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.31.1-2.71 0 0 .84-.28 2.75 1.05.8-.23 1.65-.34 2.5-.34s1.7.11 2.5.34c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.92-2.34 4.79-4.57 5.04.36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85 0 .27.18.59.69.49A10.12 10.12 0 0 0 22 12.25C22 6.59 17.52 2 12 2Z"
+      />
+    </svg>
+  );
+}
+
+function ExternalLinkIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M7 17 17 7m0 0H9m8 0v8"
+      />
+    </svg>
+  );
+}
+
+function ProjectTitleLinks({ links = [] }) {
+  const projectLinks = links.filter((link) => link?.href && link.href !== '#');
+
+  if (!projectLinks.length) return null;
+
+  return (
+    <div className="project-title-links" aria-label="Project links">
+      {projectLinks.map((link) => {
+        const isGitHub = isGitHubProjectLink(link);
+        return (
+          <a
+            key={`${link.label}-${link.href}`}
+            href={link.href}
+            target="_blank"
+            rel="noreferrer"
+            className={`project-title-link ${isGitHub ? 'project-title-link-github' : 'project-title-link-live'}`}
+            aria-label={`${link.label} for ${link.href}`}
+            title={link.label}
+          >
+            {isGitHub ? <GitHubIcon /> : <ExternalLinkIcon />}
+          </a>
+        );
+      })}
+    </div>
+  );
+}
+
 function ProjectAuthors({ authors = [] }) {
   return (
     <div className="project-authors">
       {authors.map((author) => {
-        return (
+        const hasLink = author.link && author.link !== '#';
+        return hasLink ? (
           <a key={author.name} href={author.link} target="_blank" rel="noreferrer" className="project-author-link">
             {author.name}
           </a>
+        ) : (
+          <span key={author.name} className="project-author-name">
+            {author.name}
+          </span>
         );
       })}
     </div>
@@ -393,71 +454,61 @@ function ProjectsWindow() {
 
   return (
     <WindowDocument>
-    <div className="project-gallery-view">
-      <section className="project-gallery-main" aria-label="Project gallery preview">
-        <div className="project-preview-stage">
-          <ProjectPreview project={selectedProject} />
-        </div>
-
-        <div className="project-filmstrip" aria-label="Project thumbnails">
-          {projects.map((project, index) => (
-            <button
-              key={project.name}
-              type="button"
-              className={`project-thumbnail ${index === selectedIndex ? 'active' : ''}`}
-              onClick={() => setSelectedIndex(index)}
-              aria-label={`Show ${project.name}`}
-            >
-              <ProjectPreview project={project} isThumbnail />
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <aside className="project-inspector" aria-label="Project information">
-        <div className="project-inspector-header">
-          <ProjectPreview project={selectedProject} isThumbnail />
-          <div>
-            <h2>{selectedProject.name}</h2>
-            <p>{[selectedProject.subtitle, selectedProject.kind].filter(Boolean).join(' - ')}</p>
+      <div className="project-gallery-view">
+        <section className="project-gallery-main" aria-label="Project gallery preview">
+          <div className="project-preview-stage">
+            <ProjectPreview project={selectedProject} />
           </div>
-        </div>
-        <SkillChips items={selectedTags} />
 
-        <section className="project-info-section">
-          <br/>
-          <p>{selectedProject.description}</p>
+          <div className="project-filmstrip" aria-label="Project thumbnails">
+            {projects.map((project, index) => (
+              <button
+                key={project.name}
+                type="button"
+                className={`project-thumbnail ${index === selectedIndex ? 'active' : ''}`}
+                onClick={() => setSelectedIndex(index)}
+                aria-label={`Show ${project.name}`}
+              >
+                <ProjectPreview project={project} isThumbnail />
+              </button>
+            ))}
+          </div>
         </section>
 
-        <section className="project-info-section">
-          <div className="project-info-heading">
-            <h3>Information</h3>
-          </div>
-          <ProjectInfoRow label="Created" value={selectedProject.created} />
-          <ProjectInfoRow label="Stage" value={selectedProject.stage} />
-          <ProjectInfoRow label="Kind" value={selectedProject.kind} />
-          {selectedProject.authors?.length > 0 && (
-            <ProjectInfoRow label="Authors">
-              <ProjectAuthors authors={selectedProject.authors} />
-            </ProjectInfoRow>
-          )}
-        </section>
-
-        {selectedProject.links.length > 0 && (
-          <section className="project-info-section">
-            <h3>Links</h3>
-            <div className="window-link-row">
-              {selectedProject.links.map((link) => (
-                <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="window-link">
-                  {link.label}
-                </a>
-              ))}
+        <aside className="project-inspector" aria-label="Project information">
+          <div className="project-inspector-header">
+            <ProjectPreview project={selectedProject} isThumbnail />
+            <div className="project-inspector-title-area">
+              <div className="project-inspector-title-row">
+                <h2>{selectedProject.name}</h2>
+                <ProjectTitleLinks links={selectedProject.links} />
+              </div>
+              <p>{[selectedProject.subtitle, selectedProject.kind].filter(Boolean).join(' - ')}</p>
             </div>
+          </div>
+          <SkillChips items={selectedTags} />
+
+          <section className="project-info-section">
+            <br />
+            <p>{selectedProject.description}</p>
           </section>
-        )}
-      </aside>
-    </div>
-  </WindowDocument>
+
+          <section className="project-info-section">
+            <div className="project-info-heading">
+              <h3>Information</h3>
+            </div>
+            <ProjectInfoRow label="Created" value={selectedProject.created} />
+            <ProjectInfoRow label="Stage" value={selectedProject.stage} />
+            <ProjectInfoRow label="Kind" value={selectedProject.kind} />
+            {selectedProject.authors?.length > 0 && (
+              <ProjectInfoRow label="Authors">
+                <ProjectAuthors authors={selectedProject.authors} />
+              </ProjectInfoRow>
+            )}
+          </section>
+        </aside>
+      </div>
+    </WindowDocument>
   );
 }
 
