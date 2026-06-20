@@ -1,8 +1,8 @@
 export const profile = {
   name: 'Benjamin Adedowole',
   shortName: 'Benjamin',
-  role: 'Cybersecurity & Software Developer',
-  status: 'Available for internships and software/security opportunities',
+  role: 'AI/ML and Cybersecurity Student',
+  status: 'Available for internship opportunities and collaborations',
   location: 'Dakota State University',
   email: 'benjaminadedowole@gmail.com',
   github: 'https://github.com/HeIsOdin',
@@ -19,9 +19,20 @@ export const dockApps = [
   { id: 'skills', label: 'Skills', icon: '/icons/dock/skills.svg' },
   { id: 'experience', label: 'Experience', icon: '/icons/dock/experience.svg' },
   { id: 'contact', label: 'Contact', icon: '/icons/dock/contact.svg' },
-  { id: 'resume', label: 'Education', icon: '/icons/dock/resume.svg' },
+  { id: 'education', label: 'Education', icon: '/icons/dock/resume.svg' },
   { id: 'references', label: 'References', icon: '/icons/dock/references.svg' },
 ];
+
+export const about = {
+  name: 'Benjamin Adedowole',
+  role: 'AI/ML and Cybersecurity Student',
+  location: 'Dakota State University',
+  paragraphs: [
+    'I am a Computer Science and Cyber Operations student at Dakota State University with hands-on experience building full-stack software, cybersecurity tools, and machine learning projects. I enjoy creating practical systems that combine clean interfaces, secure design, and useful automation.',
+    'I have worked on projects ranging from computer vision for Pokémon card misprint detection to authentication services, React platforms, CTF tooling, and research involving quantum machine learning for cyberattack detection. My interests sit at the intersection of AI, cybersecurity, full-stack engineering, and problem solving.',
+    'Beyond development, I value teamwork, mentorship, and clear communication. I am focused on building reliable software, learning deeply, and contributing to projects where security, usability, and real-world impact matter.',
+  ],
+};
 
 export const projects = [
   {
@@ -30,8 +41,10 @@ export const projects = [
     description:
       'AI-powered Pokémon card defect and misprint detection pipeline using OpenCV, YOLO exploration, and model training workflows.',
     stack: ['Python', 'OpenCV', 'TensorFlow', 'YOLO', 'Flask'],
-    github: 'https://github.com/HeIsOdin/Pokemon',
-    demo: 'https://pypikachu.oluwajuwon.dev',
+    links: [
+      { label: 'GitHub', href: 'https://github.com/HeIsOdin/Pokemon' },
+      { label: 'Demo', href: 'https://pypikachu.oluwajuwon.dev' },
+    ],
   },
   {
     name: 'Clash of Prodigies',
@@ -39,8 +52,10 @@ export const projects = [
     description:
       'A STEM competition platform for Nigerian high school students with modern React components and real-time competition workflows.',
     stack: ['React', 'Mantine', 'Node.js', 'PostgreSQL'],
-    github: 'https://github.com/Clash-of-Prodigies',
-    demo: 'https://clashofprodigies.com',
+    links: [
+      { label: 'GitHub', href: 'https://github.com/Clash-of-Prodigies' },
+      { label: 'Website', href: 'https://clashofprodigies.com' },
+    ],
   },
   {
     name: 'GameBox',
@@ -48,27 +63,43 @@ export const projects = [
     description:
       'Terminal-based C/ncurses environment hosting multiple games including Tic-Tac-Toe and Snake Xenzia.',
     stack: ['C', 'ncurses', 'Linux'],
-    github: '#',
-    demo: '#',
+    links: [],
   },
 ];
 
-export const skills = [
-  'Python',
-  'JavaScript',
-  'React',
-  'Node.js',
-  'C / C++',
-  'Go',
-  'PostgreSQL',
-  'Docker',
-  'GitHub',
-  'Linux',
-  'OpenCV',
-  'Cybersecurity',
-  'CTFs',
-  'Machine Learning',
-  'Network Security',
+export const skillCategories = [
+  {
+    name: 'Languages',
+    items: ['Python', 'JavaScript', 'TypeScript', 'C', 'C++', 'Go', 'SQL', 'HTML', 'CSS'],
+  },
+  {
+    name: 'Frontend',
+    items: ['React', 'Vite', 'Mantine', 'Tailwind CSS', 'React Router', 'Responsive UI'],
+  },
+  {
+    name: 'Backend',
+    items: ['Node.js', 'Express.js', 'Flask', 'FastAPI', 'RESTful APIs', 'JWT Auth'],
+  },
+  {
+    name: 'Databases',
+    items: ['PostgreSQL', 'SQLite', 'MongoDB', 'Redis'],
+  },
+  {
+    name: 'Cloud & DevOps',
+    items: ['Docker', 'GitHub Actions', 'CI/CD', 'Linux', 'Nginx', 'Deployment Automation'],
+  },
+  {
+    name: 'AI / Machine Learning',
+    items: ['OpenCV', 'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'Computer Vision', 'Quantum ML'],
+  },
+  {
+    name: 'Cybersecurity',
+    items: ['CTFs', 'Network Security', 'Web Security', 'Forensics', 'OSINT', 'Reverse Engineering'],
+  },
+  {
+    name: 'Other',
+    items: ['Git/GitHub', 'Postman', 'Wireshark', 'Technical Writing', 'Team Leadership', 'Mentorship'],
+  },
 ];
 
 export const experience = [
@@ -95,17 +126,69 @@ export const experience = [
   },
 ];
 
-export const references = [
+export const contactSections = [
   {
-    name: 'Professional references',
-    role: 'Available on request',
-    details:
-      'Use this window as a dedicated place for references, recommendations, or mentor contact notes when you are ready to add them.',
+    title: 'Location',
+    body: 'Dakota State University',
   },
   {
-    name: 'Academic and project mentors',
-    role: 'Placeholder',
-    details:
-      'Add names, titles, and preferred contact instructions here before sharing the portfolio publicly.',
+    title: 'Email',
+    link: { label: 'benjaminadedowole@gmail.com', href: 'mailto:benjaminadedowole@gmail.com' },
+  },
+  {
+    title: 'GitHub',
+    link: { label: 'github.com/HeIsOdin', href: 'https://github.com/HeIsOdin' },
+  },
+  {
+    title: 'LinkedIn',
+    link: { label: 'LinkedIn profile', href: '#' },
+  },
+];
+
+export const educationSections = [
+  {
+    heading: 'Education',
+    items: [
+      {
+        title: 'Dakota State University',
+        subtitle: 'Computer Science and Cyber Operations',
+        meta: 'Current student',
+      },
+    ],
+  },
+  {
+    heading: 'Academic Focus',
+    items: [
+      {
+        title: 'Cybersecurity and Software Engineering',
+        meta: 'Focus areas include secure software, networks, AI/ML, systems programming, and applied cyber research.',
+      },
+      {
+        title: 'Quantum Machine Learning Research',
+        meta: 'Researching quantum machine learning methods for EV charging cyberattack detection.',
+      },
+    ],
+  },
+];
+
+export const referenceSections = [
+  {
+    heading: 'Recommendations',
+    items: [
+      {
+        name: 'Professional references',
+        role: 'Available on request',
+        meta: 'Project mentors, academic contacts, and professional references can be added here when ready.',
+        quote:
+          'Use this window as a dedicated place for references, recommendations, or mentor contact notes before sharing the portfolio publicly.',
+      },
+      {
+        name: 'Academic and project mentors',
+        role: 'Placeholder',
+        meta: 'Add names, titles, dates, and preferred contact instructions here.',
+        quote:
+          'This structure is ready to scale as soon as real recommendation text or reference details are available.',
+      },
+    ],
   },
 ];
