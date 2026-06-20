@@ -310,7 +310,7 @@ function ProjectPreview({ project, isThumbnail = false }) {
         </div>
       </div>
       <div className="project-preview-footer">
-        {project.stack.slice(0, 3).map((item) => (
+        {project.tags.slice(0, 3).map((item) => (
           <span key={item}>{item}</span>
         ))}
       </div>
@@ -357,22 +357,10 @@ function ProjectsWindow() {
         <div className="project-inspector-header">
           <ProjectPreview project={selectedProject} isThumbnail />
           <div>
-            <h2>{selectedProject.fileName}</h2>
-            <p>{selectedProject.kind} - {selectedProject.size}</p>
+            <h2>{selectedProject.name}</h2>
+            <p>{selectedProject.subtitle} - {selectedProject.kind}</p>
           </div>
         </div>
-
-        <section className="project-info-section">
-          <div className="project-info-heading">
-            <h3>Information</h3>
-            <span>Show More</span>
-          </div>
-          <ProjectInfoRow label="Created" value={selectedProject.created} />
-          <ProjectInfoRow label="Modified" value={selectedProject.modified} />
-          <ProjectInfoRow label="Status" value={selectedProject.status} />
-          <ProjectInfoRow label="Dimensions" value={selectedProject.dimensions} />
-          <ProjectInfoRow label="Resolution" value={selectedProject.resolution} />
-        </section>
 
         <section className="project-info-section">
           <h3>Summary</h3>
@@ -380,8 +368,16 @@ function ProjectsWindow() {
         </section>
 
         <section className="project-info-section">
+          <div className="project-info-heading">
+            <h3>Information</h3>
+          </div>
+          <ProjectInfoRow label="Created" value={selectedProject.created} />
+          <ProjectInfoRow label="Stage" value={selectedProject.stage} />
+        </section>
+
+        <section className="project-info-section">
           <h3>Tags</h3>
-          <SkillChips items={selectedProject.stack} />
+          <SkillChips items={selectedProject.tags} />
         </section>
 
         {selectedProject.links.length > 0 && (

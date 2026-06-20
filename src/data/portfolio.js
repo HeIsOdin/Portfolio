@@ -37,19 +37,25 @@ export const about = {
 export const projects = [
   {
     name: 'PyPikachu',
-    fileName: 'PyPikachu_CV',
-    kind: 'Computer Vision Project',
-    size: 'ML / CV pipeline',
-    tag: 'Computer Vision / ML',
+    fileName: 'pypikachu.jpg',
+    subtitle: 'AI-Powered Pokémon Card Defect Detection',
+    kind: 'ML & CV pipeline',
     created: 'Spring 2025',
-    modified: 'Recently updated',
-    status: 'Active prototype',
-    dimensions: 'Card ROI + classifier',
-    resolution: '92% reported accuracy',
-    tone: 'vision',
-    description:
-      'AI-powered Pokémon card defect and misprint detection pipeline using OpenCV, YOLO exploration, and model training workflows.',
-    stack: ['Python', 'OpenCV', 'TensorFlow', 'YOLO', 'Flask'],
+    authors: [{
+      name: 'Benjamin Adedowole',
+      link: '#'
+    },
+    {
+      name: 'Lawal Victor',
+      link: '#'
+    },
+    {
+      name: 'Jessica Senyah',
+      link: '#'
+    }],
+    stage: 'Production',
+    description: 'Catch and inspect rare Pokémon card misprints using image alignment and eBay-powered crawling.',
+    tags: ['Python', 'OpenCV', 'TensorFlow', 'YOLO', 'Flask'],
     links: [
       { label: 'GitHub', href: 'https://github.com/HeIsOdin/Pokemon' },
       { label: 'Demo', href: 'https://pypikachu.oluwajuwon.dev' },
@@ -57,39 +63,33 @@ export const projects = [
   },
   {
     name: 'Clash of Prodigies',
-    fileName: 'Clash_Prodigies',
-    kind: 'Full-Stack Platform',
-    size: 'React / Node app',
-    tag: 'Full-Stack Platform',
+    fileName: 'clash-of-prodigies.jpg',
+    subtitle: 'Full-Stack Platform',
+    kind: 'Web Application',
     created: '2025',
     modified: 'Recently updated',
-    status: 'Production platform',
-    dimensions: 'Competition workflows',
-    resolution: 'Nigerian STEM students',
-    tone: 'platform',
-    description:
-      'A STEM competition platform for Nigerian high school students with modern React components and real-time competition workflows.',
-    stack: ['React', 'Mantine', 'Node.js', 'PostgreSQL'],
+    stage: 'Development',
+    description: 'A STEM competition platform for Nigerian high school students with modern React components and real-time competition workflows.',
+    tags: ['React', 'Mantine', 'Node.js', 'PostgreSQL'],
     links: [
       { label: 'GitHub', href: 'https://github.com/Clash-of-Prodigies' },
       { label: 'Website', href: 'https://clashofprodigies.com' },
     ],
   },
   {
-    name: 'GameBox',
-    fileName: 'GameBox_Terminal',
+    name: 'ZBox',
+    fileName: 'ZBox.jpg',
+    subtitle: 'Terminal Game Suite',
     kind: 'Systems Programming Project',
-    size: 'C / ncurses',
-    tag: 'Systems Programming',
     created: '2024',
-    modified: 'Archived',
-    status: 'Completed',
-    dimensions: 'Terminal game suite',
-    resolution: 'Linux CLI',
-    tone: 'systems',
+    stage: 'Archived',
+    authors: [{
+      name: 'Benjamin Adedowole',
+      link: '#'
+    }],
     description:
       'Terminal-based C/ncurses environment hosting multiple games including Tic-Tac-Toe and Snake Xenzia.',
-    stack: ['C', 'ncurses', 'Linux'],
+    tags: ['C', 'ncurses', 'Linux'],
     links: [],
   },
 ];
