@@ -1,0 +1,76 @@
+.project-preview-has-image {
+  background: #f5f5f7;
+}
+
+.project-preview-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.project-preview-thumb.project-preview-has-image .project-preview-image {
+  border-radius: 6px;
+}
+
+.project-info-value {
+  min-width: 0;
+  color: #1d1d1f;
+  font-size: 14px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.project-info-value-custom {
+  font-weight: 600;
+}
+
+.project-authors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 6px;
+}
+
+.project-author-link,
+.project-author-name {
+  display: inline-flex;
+  align-items: center;
+  color: #1d1d1f;
+  font-size: 14px;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.project-author-link {
+  color: rgb(0, 122, 255);
+  text-decoration: none;
+}
+
+.project-author-link:hover {
+  text-decoration: underline;
+}
+
+.project-author-link:not(:last-child)::after,
+.project-author-name:not(:last-child)::after {
+  content: ',';
+  color: #6e6e73;
+}
+
+.project-preview-default {
+  background:
+    radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0) 30%),
+    linear-gradient(135deg, #0f172a, #2563eb 45%, #f59e0b);
+}
+
+@media (max-width: 700px) {
+  .project-info-row {
+    grid-template-columns: 84px minmax(0, 1fr);
+  }
+
+  .project-author-link,
+  .project-author-name,
+  .project-info-value {
+    font-size: 13px;
+  }
+}
