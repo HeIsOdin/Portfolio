@@ -41,7 +41,7 @@ button {
 }
 
 .mac-desktop {
-  background-image: linear-gradient(180deg, rgba(10, 24, 46, 0.24), rgba(10, 24, 46, 0.44)), url('/assets/wallpaper.svg');
+  background-image: linear-gradient(180deg, rgba(10, 24, 46, 0.24), rgba(10, 24, 46, 0.44)), url('/assets/wallpaper.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
