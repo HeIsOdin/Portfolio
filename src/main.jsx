@@ -4,6 +4,7 @@ import App from './App.jsx';
 import './styles/index.css';
 import './styles/macos-overrides.css';
 import './styles/about-window.css';
+import './styles/project-gallery.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
