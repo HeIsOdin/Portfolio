@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { dockApps, experience, profile, projects, references, skills } from './data/portfolio.js';
 
 const initialWindows = {
-  about: { id: 'about', title: 'About Benjamin', x: 80, y: 74, w: 560, h: 440, minimized: false, maximized: false },
+  about: { id: 'about', title: 'About Me', x: 80, y: 36, w: 700, h: 435, minimized: false, maximized: false },
   projects: { id: 'projects', title: 'Projects', x: 180, y: 112, w: 740, h: 520, minimized: true, maximized: false },
   skills: { id: 'skills', title: 'Skills', x: 260, y: 96, w: 520, h: 420, minimized: true, maximized: false },
   experience: { id: 'experience', title: 'Experience', x: 330, y: 130, w: 570, h: 450, minimized: true, maximized: false },
@@ -76,7 +76,7 @@ function App() {
             key={windowItem.id}
             windowItem={windowItem}
             isActive={activeWindow === windowItem.id}
-            zIndex={20 + index + (activeWindow === windowItem.id ? 20 : 0)}
+            zIndex={activeWindow === windowItem.id ? 100 : 70 + index}
             onFocus={() => setActiveWindow(windowItem.id)}
             onClose={() => closeWindow(windowItem.id)}
             onMinimize={() => closeWindow(windowItem.id)}
@@ -151,8 +151,24 @@ function ProfileCard() {
 function MacWindow({ windowItem, isActive, zIndex, children, onClose, onFocus, onMaximize, onMinimize, onMove }) {
   const [dragOffset, setDragOffset] = useState(null);
   const style = windowItem.maximized
-    ? { left: 12, top: 42, width: 'calc(100vw - 24px)', height: 'calc(100vh - 152px)', zIndex }
-    : { left: windowItem.x, top: windowItem.y, width: windowItem.w, height: windowItem.h, zIndex };
+    ? {
+        left: 12,
+        top: 42,
+        width: 'calc(100vw - 24px)',
+        height: 'calc(100vh - 152px)',
+        maxWidth: 'calc(100vw - 16px)',
+        maxHeight: 'calc(100dvh - 180px)',
+        zIndex,
+      }
+    : {
+        left: windowItem.x,
+        top: windowItem.y,
+        width: windowItem.w,
+        height: windowItem.h,
+        maxWidth: 'calc(100vw - 16px)',
+        maxHeight: 'calc(100dvh - 180px)',
+        zIndex,
+      };
 
   function startDrag(event) {
     if (windowItem.maximized) return;
@@ -168,7 +184,7 @@ function MacWindow({ windowItem, isActive, zIndex, children, onClose, onFocus, o
       const maxY = window.innerHeight - 180;
       onMove({
         x: Math.max(8, Math.min(maxX, event.clientX - dragOffset.x)),
-        y: Math.max(38, Math.min(maxY, event.clientY - dragOffset.y)),
+        y: Math.max(36, Math.min(maxY, event.clientY - dragOffset.y)),
       });
     }
 
@@ -185,14 +201,19 @@ function MacWindow({ windowItem, isActive, zIndex, children, onClose, onFocus, o
   }, [dragOffset, onMove]);
 
   return (
-    <article className={`mac-window ${isActive ? 'active' : 'inactive'}`} style={style} onMouseDown={onFocus}>
+    <article
+      className={`mac-window animate-window-open ${isActive ? 'active' : 'inactive'}`}
+      tabIndex={0}
+      style={style}
+      onMouseDown={onFocus}
+    >
       <div className="mac-title-bar" onPointerDown={startDrag}>
-        <div className="traffic-lights" onPointerDown={(event) => event.stopPropagation()}>
-          <button type="button" className="close" aria-label="Close" onClick={onClose} />
-          <button type="button" className="minimize" aria-label="Minimize" onClick={onMinimize} />
-          <button type="button" className="zoom" aria-label="Maximize" onClick={onMaximize} />
+        <div className="mac-traffic" onPointerDown={(event) => event.stopPropagation()}>
+          <button type="button" className="mac-close-btn" aria-label="Close" onClick={onClose} />
+          <button type="button" className="mac-minimize-btn" aria-label="Minimize" onClick={onMinimize} />
+          <button type="button" className="mac-zoom-btn" aria-label="Zoom" onClick={onMaximize} disabled />
         </div>
-        <p>{windowItem.title}</p>
+        <span className="mac-window-title">{windowItem.title}</span>
       </div>
       <div className="mac-window-pane">{children}</div>
     </article>
@@ -233,21 +254,22 @@ function WindowContent({ id }) {
 
 function AboutWindow() {
   return (
-    <section className="window-section about-window">
-      <div className="portrait-card">
-        <div className="portrait-orb">BA</div>
+    <div className="about-content">
+      <div className="about-header">
+        <h1 className="about-name">Benjamin Adedowole</h1>
+        <p className="about-role">AI/ML and Cybersecurity Student</p>
+        <p className="about-location">Dakota State University</p>
       </div>
-      <div>
-        <p className="eyebrow">About Me</p>
-        <h2>{profile.name}</h2>
-        <h3>{profile.role}</h3>
-        <p>{profile.summary}</p>
-        <div className="quick-actions">
-          <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
-          <a href={`mailto:${profile.email}`}>Email Me</a>
-        </div>
-      </div>
-    </section>
+
+      <section className="about-panel">
+        <h2>About Me</h2>
+        <p className="about-text">
+          I am a Computer Science and Cyber Operations student at Dakota State University with hands-on experience building full-stack software, cybersecurity tools, and machine learning projects. I enjoy creating practical systems that combine clean interfaces, secure design, and useful automation.
+          {'\n\n'}I have worked on projects ranging from computer vision for Pokémon card misprint detection to authentication services, React platforms, CTF tooling, and research involving quantum machine learning for cyberattack detection. My interests sit at the intersection of AI, cybersecurity, full-stack engineering, and problem solving.
+          {'\n\n'}Beyond development, I value teamwork, mentorship, and clear communication. I am focused on building reliable software, learning deeply, and contributing to projects where security, usability, and real-world impact matter.
+        </p>
+      </section>
+    </div>
   );
 }
 
