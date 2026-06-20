@@ -1,14 +1,24 @@
 import { useEffect, useMemo, useState } from 'react';
-import { dockApps, experience, profile, projects, references, skills } from './data/portfolio.js';
+import {
+  about,
+  contactSections,
+  dockApps,
+  educationSections,
+  experience,
+  profile,
+  projects,
+  referenceSections,
+  skillCategories,
+} from './data/portfolio.js';
 
 const initialWindows = {
   about: { id: 'about', title: 'About Me', x: 80, y: 36, w: 700, h: 435, minimized: false, maximized: false },
-  projects: { id: 'projects', title: 'Projects', x: 180, y: 112, w: 740, h: 520, minimized: true, maximized: false },
-  skills: { id: 'skills', title: 'Skills', x: 260, y: 96, w: 520, h: 420, minimized: true, maximized: false },
-  experience: { id: 'experience', title: 'Experience', x: 330, y: 130, w: 570, h: 450, minimized: true, maximized: false },
-  contact: { id: 'contact', title: 'Contact', x: 420, y: 150, w: 500, h: 390, minimized: true, maximized: false },
-  resume: { id: 'resume', title: 'Resume', x: 360, y: 106, w: 540, h: 420, minimized: true, maximized: false },
-  references: { id: 'references', title: 'References', x: 450, y: 118, w: 540, h: 420, minimized: true, maximized: false },
+  projects: { id: 'projects', title: 'Projects', x: 80, y: 36, w: 700, h: 435, minimized: true, maximized: false },
+  skills: { id: 'skills', title: 'Skills', x: 80, y: 36, w: 700, h: 435, minimized: true, maximized: false },
+  experience: { id: 'experience', title: 'Experience', x: 80, y: 36, w: 650, h: 435, minimized: true, maximized: false },
+  contact: { id: 'contact', title: 'Contact', x: 80, y: 36, w: 650, h: 435, minimized: true, maximized: false },
+  education: { id: 'education', title: 'Education', x: 80, y: 36, w: 650, h: 435, minimized: true, maximized: false },
+  references: { id: 'references', title: 'References', x: 77, y: 36, w: 700, h: 435, minimized: true, maximized: false },
 };
 
 const menuItems = ['File', 'Edit', 'View', 'Tools', 'Window', 'Help'];
@@ -30,11 +40,6 @@ function App() {
   );
 
   function openApp(app) {
-    if (app.external) {
-      window.open(app.external, '_blank', 'noopener,noreferrer');
-      return;
-    }
-
     setWindows((current) => ({
       ...current,
       [app.id]: { ...current[app.id], minimized: false },
@@ -76,7 +81,7 @@ function App() {
             key={windowItem.id}
             windowItem={windowItem}
             isActive={activeWindow === windowItem.id}
-            zIndex={activeWindow === windowItem.id ? 100 : 70 + index}
+            zIndex={activeWindow === windowItem.id ? 100 + index : 70 + index}
             onFocus={() => setActiveWindow(windowItem.id)}
             onClose={() => closeWindow(windowItem.id)}
             onMinimize={() => closeWindow(windowItem.id)}
@@ -138,9 +143,7 @@ function ProfileCard() {
                 GitHub
               </a>
             </div>
-            <div className="profile-card-note">
-              Available for internship opportunities and collaborations
-            </div>
+            <div className="profile-card-note">Available for internship opportunities and collaborations</div>
           </div>
         </div>
       </div>
@@ -209,9 +212,9 @@ function MacWindow({ windowItem, isActive, zIndex, children, onClose, onFocus, o
     >
       <div className="mac-title-bar" onPointerDown={startDrag}>
         <div className="mac-traffic" onPointerDown={(event) => event.stopPropagation()}>
-          <button type="button" className="mac-close-btn" aria-label="Close" onClick={onClose}>x</button>
-          <button type="button" className="mac-minimize-btn" aria-label="Minimize" onClick={onMinimize}>-</button>
-          <button type="button" className="mac-zoom-btn" aria-label="Zoom" onClick={onMaximize} disabled={windowItem.maximized}>{windowItem.maximized ? '🗗' : '+'}</button>
+          <button type="button" className="mac-close-btn" aria-label="Close" onClick={onClose} />
+          <button type="button" className="mac-minimize-btn" aria-label="Minimize" onClick={onMinimize} />
+          <button type="button" className="mac-zoom-btn" aria-label="Zoom" onClick={onMaximize} disabled />
         </div>
         <span className="mac-window-title">{windowItem.title}</span>
       </div>
@@ -228,7 +231,7 @@ function Dock({ apps, windows, onOpen }) {
           <button key={app.id} className="dock-icon" type="button" onClick={() => onOpen(app)} aria-label={app.label}>
             <img src={app.icon} alt="" />
             <span className="dock-tooltip">{app.label}</span>
-            {!app.external && !windows[app.id]?.minimized && <span className="running-dot" />}
+            {!windows[app.id]?.minimized && <span className="running-dot" />}
           </button>
         ))}
         <span className="dock-divider" />
@@ -247,145 +250,161 @@ function WindowContent({ id }) {
   if (id === 'skills') return <SkillsWindow />;
   if (id === 'experience') return <ExperienceWindow />;
   if (id === 'contact') return <ContactWindow />;
-  if (id === 'resume') return <ResumeWindow />;
+  if (id === 'education') return <EducationWindow />;
   if (id === 'references') return <ReferencesWindow />;
   return null;
 }
 
+function WindowDocument({ children }) {
+  return <div className="window-document">{children}</div>;
+}
+
+function WindowHeading({ children }) {
+  return <h2 className="window-heading">{children}</h2>;
+}
+
+function InfoCard({ children }) {
+  return <section className="window-card">{children}</section>;
+}
+
+function SkillChips({ items }) {
+  return (
+    <div className="skill-chip-row">
+      {items.map((item) => (
+        <span className="skill-chip" key={item}>{item}</span>
+      ))}
+    </div>
+  );
+}
+
 function AboutWindow() {
   return (
-    <div className="about-content">
+    <WindowDocument>
       <div className="about-header">
-        <h1 className="about-name">Benjamin Adedowole</h1>
-        <p className="about-role">AI/ML and Cybersecurity Student</p>
-        <p className="about-location">Dakota State University</p>
+        <h1 className="about-name">{about.name}</h1>
+        <p className="about-role">{about.role}</p>
+        <p className="about-location">{about.location}</p>
       </div>
 
-      <section className="about-panel">
-        <h2>About Me</h2>
-        <p className="about-text">
-          I am a Computer Science and Cyber Operations student at Dakota State University with hands-on experience building full-stack software, cybersecurity tools, and machine learning projects. I enjoy creating practical systems that combine clean interfaces, secure design, and useful automation.
-          {'\n\n'}I have worked on projects ranging from computer vision for Pokémon card misprint detection to authentication services, React platforms, CTF tooling, and research involving quantum machine learning for cyberattack detection. My interests sit at the intersection of AI, cybersecurity, full-stack engineering, and problem solving.
-          {'\n\n'}Beyond development, I value teamwork, mentorship, and clear communication. I am focused on building reliable software, learning deeply, and contributing to projects where security, usability, and real-world impact matter.
-        </p>
-      </section>
-    </div>
+      <InfoCard>
+        <h3 className="window-card-title">About Me</h3>
+        <p className="window-card-text multiline-text">{about.paragraphs.join('\n\n')}</p>
+      </InfoCard>
+    </WindowDocument>
   );
 }
 
 function ProjectsWindow() {
   return (
-    <section className="window-section">
-      <p className="eyebrow">Selected Work</p>
-      <h2>Projects</h2>
-      <div className="project-grid">
-        {projects.map((project) => (
-          <article className="project-card" key={project.name}>
-            <div>
-              <p className="project-tag">{project.tag}</p>
-              <h3>{project.name}</h3>
-              <p>{project.description}</p>
+    <WindowDocument>
+      <WindowHeading>Projects</WindowHeading>
+      {projects.map((project) => (
+        <InfoCard key={project.name}>
+          <h3 className="window-card-title">{project.name}</h3>
+          <p className="window-card-subtitle">{project.tag}</p>
+          <p className="window-card-text">{project.description}</p>
+          <SkillChips items={project.stack} />
+          {project.links.length > 0 && (
+            <div className="window-link-row">
+              {project.links.map((link) => (
+                <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="window-link">
+                  {link.label}
+                </a>
+              ))}
             </div>
-            <div className="chips">
-              {project.stack.map((item) => <span key={item}>{item}</span>)}
-            </div>
-            <div className="card-actions">
-              <a href={project.github} target="_blank" rel="noreferrer">GitHub</a>
-              <a href={project.demo} target="_blank" rel="noreferrer">Demo</a>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+          )}
+        </InfoCard>
+      ))}
+    </WindowDocument>
   );
 }
 
 function SkillsWindow() {
   return (
-    <section className="window-section">
-      <p className="eyebrow">Toolbox</p>
-      <h2>Skills</h2>
-      <div className="skill-cloud">
-        {skills.map((skill) => <span key={skill}>{skill}</span>)}
-      </div>
-    </section>
+    <WindowDocument>
+      <WindowHeading>Technical Skills</WindowHeading>
+      {skillCategories.map((category) => (
+        <InfoCard key={category.name}>
+          <h3 className="window-card-title">{category.name}</h3>
+          <SkillChips items={category.items} />
+        </InfoCard>
+      ))}
+    </WindowDocument>
   );
 }
 
 function ExperienceWindow() {
   return (
-    <section className="window-section">
-      <p className="eyebrow">Timeline</p>
-      <h2>Experience</h2>
-      <div className="timeline">
-        {experience.map((item) => (
-          <article key={`${item.role}-${item.company}`}>
-            <span className="timeline-dot" />
-            <div>
-              <p>{item.period}</p>
-              <h3>{item.role}</h3>
-              <h4>{item.company}</h4>
-              <p>{item.details}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ReferencesWindow() {
-  return (
-    <section className="window-section">
-      <p className="eyebrow">References</p>
-      <h2>References</h2>
-      <div className="timeline">
-        {references.map((item) => (
-          <article key={item.name}>
-            <span className="timeline-dot" />
-            <div>
-              <h3>{item.name}</h3>
-              <h4>{item.role}</h4>
-              <p>{item.details}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+    <WindowDocument>
+      <WindowHeading>Experience</WindowHeading>
+      {experience.map((item) => (
+        <InfoCard key={`${item.role}-${item.company}`}>
+          <h3 className="window-card-title">{item.role}</h3>
+          <p className="window-card-subtitle">{item.company}</p>
+          <p className="window-card-meta">{item.period}</p>
+          <p className="window-card-text">{item.details}</p>
+        </InfoCard>
+      ))}
+    </WindowDocument>
   );
 }
 
 function ContactWindow() {
   return (
-    <section className="window-section contact-window">
-      <p className="eyebrow">Get in touch</p>
-      <h2>Contact</h2>
-      <p>I am open to internships, software projects, cybersecurity research, and collaboration.</p>
-      <a className="big-link" href={`mailto:${profile.email}`}>{profile.email}</a>
-      <div className="quick-actions">
-        <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
-        <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-      </div>
-    </section>
+    <WindowDocument>
+      <WindowHeading>Contact Information</WindowHeading>
+      {contactSections.map((section) => (
+        <InfoCard key={section.title}>
+          <h3 className="window-card-title">{section.title}</h3>
+          {section.link ? (
+            <a href={section.link.href} target={section.link.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="window-link">
+              {section.link.label}
+            </a>
+          ) : (
+            <p className="window-card-text compact-text">{section.body}</p>
+          )}
+        </InfoCard>
+      ))}
+    </WindowDocument>
   );
 }
 
-function ResumeWindow() {
+function EducationWindow() {
   return (
-    <section className="window-section">
-      <p className="eyebrow">Resume Snapshot</p>
-      <h2>{profile.name}</h2>
-      <p>{profile.location}</p>
-      <div className="resume-list">
-        <p><strong>Focus:</strong> Software engineering, cybersecurity, full-stack development, AI-assisted tools.</p>
-        <p><strong>Highlights:</strong> PyPikachu, Clash of Prodigies, Cerberus, CTF competitions, DSU leadership.</p>
-        <p><strong>Email:</strong> {profile.email}</p>
-      </div>
-      <div className="quick-actions">
-        <a href={profile.resume}>Resume Link</a>
-        <a href={profile.github} target="_blank" rel="noreferrer">GitHub Profile</a>
-      </div>
-    </section>
+    <WindowDocument>
+      {educationSections.map((section) => (
+        <div key={section.heading}>
+          <WindowHeading>{section.heading}</WindowHeading>
+          {section.items.map((item) => (
+            <InfoCard key={item.title}>
+              <h3 className="window-card-title">{item.title}</h3>
+              {item.subtitle && <p className="window-card-subtitle">{item.subtitle}</p>}
+              {item.meta && <p className="window-card-meta">{item.meta}</p>}
+            </InfoCard>
+          ))}
+        </div>
+      ))}
+    </WindowDocument>
+  );
+}
+
+function ReferencesWindow() {
+  return (
+    <WindowDocument>
+      {referenceSections.map((section) => (
+        <div key={section.heading}>
+          <WindowHeading>{section.heading}</WindowHeading>
+          {section.items.map((item) => (
+            <InfoCard key={item.name}>
+              <h3 className="window-card-title">{item.name}</h3>
+              <p className="window-card-subtitle">{item.role}</p>
+              <p className="window-card-meta">{item.meta}</p>
+              {item.quote && <p className="reference-quote">“{item.quote}”</p>}
+            </InfoCard>
+          ))}
+        </div>
+      ))}
+    </WindowDocument>
   );
 }
 
