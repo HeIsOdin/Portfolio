@@ -141,9 +141,9 @@ export const skillCategories = [
 
 export const experience = [
   {
-    role: 'Full-Stack Engineer Intern',
+    role: 'Co-Founder & Software Engineer',
     company: 'Clash of Prodigies',
-    period: 'Recent',
+    period: 'August 2023 - Present',
     details:
       'Built platform features, improved deployment workflows, and worked on real-time systems for a STEM competition product.',
   },
@@ -193,7 +193,7 @@ export const educationSections = [
       {
         title: 'Dakota State University',
         subtitle: 'Computer Science and Cyber Operations',
-        meta: 'Current student - 4.0 CGPA',
+        meta: 'Current student - 4.0 GPA',
       },
     ],
   },
@@ -216,20 +216,20 @@ export const referenceSections = [
   {
     heading: 'Recommendations',
     items: [
-      {
-        name: 'Professional references',
-        role: 'Available on request',
-        meta: 'Project mentors, academic contacts, and professional references can be added here when ready.',
-        quote:
-          'Use this window as a dedicated place for references, recommendations, or mentor contact notes before sharing the portfolio publicly.',
-      },
-      {
-        name: 'Academic and project mentors',
-        role: 'Placeholder',
-        meta: 'Add names, titles, dates, and preferred contact instructions here.',
-        quote:
-          'This structure is ready to scale as soon as real recommendation text or reference details are available.',
-      },
+      // {
+      //   name: 'Professional references',
+      //   role: 'Available on request',
+      //   meta: 'Project mentors, academic contacts, and professional references can be added here when ready.',
+      //   quote:
+      //     'Use this window as a dedicated place for references, recommendations, or mentor contact notes before sharing the portfolio publicly.',
+      // },
+      // {
+      //   name: 'Academic and project mentors',
+      //   role: 'Placeholder',
+      //   meta: 'Add names, titles, dates, and preferred contact instructions here.',
+      //   quote:
+      //     'This structure is ready to scale as soon as real recommendation text or reference details are available.',
+      // },
     ],
   },
 ];
