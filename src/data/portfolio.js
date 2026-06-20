@@ -63,7 +63,7 @@ export const projects = [
   },
   {
     name: 'Clash of Prodigies',
-    fileName: 'clash-of-prodigies.jpg',
+    fileName: 'clashofprodigies.png',
     subtitle: 'Full-Stack Platform',
     kind: 'Web Application',
     created: '2025',
@@ -77,14 +77,18 @@ export const projects = [
     ],
   },
   {
-    name: 'ZBox',
-    fileName: 'ZBox.jpg',
+    name: 'Danger Dash',
+    fileName: 'dangerdash.png',
     subtitle: 'Terminal Game Suite',
     kind: 'Systems Programming Project',
     created: '2024',
     stage: 'Archived',
     authors: [{
       name: 'Benjamin Adedowole',
+      link: '#'
+    },
+    {
+      name: 'Muhammad Essa',
       link: '#'
     }],
     description:

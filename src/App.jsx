@@ -348,10 +348,7 @@ function ProjectPreview({ project, isThumbnail = false }) {
           </div>
           <div className="project-preview-body">
             <div className="project-preview-icon">{getProjectInitials(project)}</div>
-            <div className="project-preview-copy">
-              <strong>{project.name}</strong>
-              <span>{project.subtitle ?? project.tag ?? project.kind}</span>
-            </div>
+
           </div>
           <div className="project-preview-footer">
             {tags.slice(0, 3).map((item) => (
@@ -368,15 +365,10 @@ function ProjectAuthors({ authors = [] }) {
   return (
     <div className="project-authors">
       {authors.map((author) => {
-        const hasLink = author.link && author.link !== '#';
-        return hasLink ? (
+        return (
           <a key={author.name} href={author.link} target="_blank" rel="noreferrer" className="project-author-link">
             {author.name}
           </a>
-        ) : (
-          <span key={author.name} className="project-author-name">
-            {author.name}
-          </span>
         );
       })}
     </div>
@@ -400,6 +392,7 @@ function ProjectsWindow() {
   const selectedTags = getProjectTags(selectedProject);
 
   return (
+    <WindowDocument>
     <div className="project-gallery-view">
       <section className="project-gallery-main" aria-label="Project gallery preview">
         <div className="project-preview-stage">
@@ -429,9 +422,10 @@ function ProjectsWindow() {
             <p>{[selectedProject.subtitle, selectedProject.kind].filter(Boolean).join(' - ')}</p>
           </div>
         </div>
+        <SkillChips items={selectedTags} />
 
         <section className="project-info-section">
-          <h3>Summary</h3>
+          <br/>
           <p>{selectedProject.description}</p>
         </section>
 
@@ -440,7 +434,6 @@ function ProjectsWindow() {
             <h3>Information</h3>
           </div>
           <ProjectInfoRow label="Created" value={selectedProject.created} />
-          {selectedProject.modified && <ProjectInfoRow label="Modified" value={selectedProject.modified} />}
           <ProjectInfoRow label="Stage" value={selectedProject.stage} />
           <ProjectInfoRow label="Kind" value={selectedProject.kind} />
           {selectedProject.authors?.length > 0 && (
@@ -448,11 +441,6 @@ function ProjectsWindow() {
               <ProjectAuthors authors={selectedProject.authors} />
             </ProjectInfoRow>
           )}
-        </section>
-
-        <section className="project-info-section">
-          <h3>Tags</h3>
-          <SkillChips items={selectedTags} />
         </section>
 
         {selectedProject.links.length > 0 && (
@@ -469,6 +457,7 @@ function ProjectsWindow() {
         )}
       </aside>
     </div>
+  </WindowDocument>
   );
 }
 
