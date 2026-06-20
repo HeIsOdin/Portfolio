@@ -13,6 +13,65 @@
   border-radius: 6px;
 }
 
+.project-inspector-title-area {
+  min-width: 0;
+  flex: 1;
+}
+
+.project-inspector-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.project-inspector-title-row h2 {
+  min-width: 0;
+  flex: 1;
+}
+
+.project-title-links {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 7px;
+}
+
+.project-title-link {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  color: #1d1d1f;
+  background: rgba(0, 0, 0, 0.055);
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.project-title-link:hover {
+  border-color: rgba(0, 0, 0, 0.14);
+  background: rgba(0, 0, 0, 0.09);
+  transform: translateY(-1px);
+}
+
+.project-title-link svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.project-title-link-live svg {
+  width: 17px;
+  height: 17px;
+}
+
 .project-info-value {
   min-width: 0;
   color: #1d1d1f;
@@ -66,6 +125,15 @@
 @media (max-width: 700px) {
   .project-info-row {
     grid-template-columns: 84px minmax(0, 1fr);
+  }
+
+  .project-inspector-title-row {
+    align-items: flex-start;
+  }
+
+  .project-title-link {
+    width: 26px;
+    height: 26px;
   }
 
   .project-author-link,
