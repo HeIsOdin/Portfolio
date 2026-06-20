@@ -129,13 +129,22 @@ function AppleLogo({ className = '' }) {
 function ProfileBackdrop() {
   return (
     <div className="profile-backdrop-content" aria-hidden="true">
-      <div className="profile-backdrop-orb profile-backdrop-orb-blue" />
-      <div className="profile-backdrop-orb profile-backdrop-orb-amber" />
-      <div className="profile-backdrop-grid">
-        <span>AI/ML</span>
-        <span>Cyber</span>
-        <span>React</span>
-        <span>CTF</span>
+      <div className="profile-backdrop-window">
+        <div className="profile-backdrop-titlebar">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="profile-backdrop-body">
+          <div className="profile-backdrop-line profile-backdrop-line-long" />
+          <div className="profile-backdrop-line profile-backdrop-line-mid" />
+          <div className="profile-backdrop-chips">
+            <span>AI/ML</span>
+            <span>Cyber</span>
+            <span>React</span>
+            <span>CTF</span>
+          </div>
+        </div>
       </div>
     </div>
   );
