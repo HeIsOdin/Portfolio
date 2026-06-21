@@ -62,14 +62,27 @@
 }
 
 .project-title-link svg {
+  display: none;
+}
+
+.project-title-link::before {
+  content: '';
   width: 16px;
   height: 16px;
   display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
-.project-title-link-live svg {
+.project-title-link-github::before {
+  background-image: url('/icons/dock/github.svg');
+}
+
+.project-title-link-live::before {
   width: 17px;
   height: 17px;
+  background-image: url('/icons/dock/external-link.svg');
 }
 
 .project-info-value {
