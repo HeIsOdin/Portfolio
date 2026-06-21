@@ -7,7 +7,7 @@ export const profile = {
   email: 'benjaminadedowole@gmail.com',
   github: 'https://github.com/HeIsOdin',
   linkedin: 'https://linkedin.com/in/benjamin-ade/',
-  resume: '#',
+  resume: 'https://drive.usercontent.google.com/u/0/uc?id=1eLgLEJU9qwDO3DYTRrB_yZylKJeq_3Ri&export=download',
   headline: 'Building secure, scalable, and creative software experiences.',
   summary:
     'Computer Science and Cyber Operations student at Dakota State University. I build software, compete in CTFs, and work on projects that combine security, automation, machine learning, and useful interfaces.',
@@ -54,11 +54,11 @@ export const projects = [
       },
       {
         name: 'Lawal Victor',
-        link: '#',
+        link: 'https://github.com/lavic001',
       },
       {
         name: 'Jessica Senyah',
-        link: '#',
+        link: 'https://github.com/JessSen22',
       },
     ],
     stage: 'Production',
@@ -98,7 +98,7 @@ export const projects = [
       },
       {
         name: 'Muhammad Essa',
-        link: '#',
+        link: 'https://github.com/potterpk',
       },
       {
         name: 'Ethan Weyer',
