@@ -8,6 +8,7 @@ export const profile = {
   github: 'https://github.com/HeIsOdin',
   linkedin: 'https://linkedin.com/in/benjamin-ade/',
   resume: 'https://drive.usercontent.google.com/u/0/uc?id=1eLgLEJU9qwDO3DYTRrB_yZylKJeq_3Ri&export=download',
+  discord: 'https://discordapp.com/users/heisodin',
   headline: 'Building secure, scalable, and creative software experiences.',
   summary:
     'Computer Science and Cyber Operations student at Dakota State University. I build software, compete in CTFs, and work on projects that combine security, automation, machine learning, and useful interfaces.',

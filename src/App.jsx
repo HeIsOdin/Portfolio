@@ -286,6 +286,15 @@ function ProfileCard({ appWindow, showProfile }) {
               <a href={profile.github} target="_blank" rel="noopener noreferrer" className="profile-card-link" onClick={(event) => event.stopPropagation()}>
                 GitHub
               </a>
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="profile-card-link" onClick={(event) => event.stopPropagation()}>
+                LinkedIn
+              </a>
+              <a href={profile.resume} target="_blank" rel="noopener noreferrer" className="profile-card-link" onClick={(event) => event.stopPropagation()}>
+                Resume
+              </a>
+              <a href={profile.discord} target="_blank" rel="noopener noreferrer" className="profile-card-link" onClick={(event) => event.stopPropagation()}>
+                Discord
+              </a>
             </div>
             <div className="profile-card-note">Available for internship opportunities and collaborations</div>
           </div>
