@@ -183,6 +183,7 @@ export const achievementsSections = [
         result: 'Second Runner-Up - Team Placement',
         period: 'Regional competition',
         meta: 'Competed with an NCAE Cyber Games team in cyber defense and security-focused challenges.',
+        achievementUrl: 'N/A',
       },
       {
         title: 'HackTheBox University CTF 2024: Binary Badlands',
@@ -190,13 +191,15 @@ export const achievementsSections = [
         result: '305th of 1,128 teams - 7,850 points',
         period: 'December 13-15, 2024',
         meta: 'Competed with team DSU_Trojans and solved 24 of 49 challenges in the HackTheBox University CTF 2024 Binary Badlands event.',
+        achievementUrl: 'N/A',
       },
       {
-        title: 'July 2025 MetaCTF Flash CTF',
-        subtitle: 'Two-hour cybersecurity CTF',
-        result: 'Certificate of Participation',
-        period: 'July 24, 2025',
-        meta: 'Competed in the July 2025 MetaCTF Flash CTF, a timed cybersecurity challenge event.',
+        title: 'MetaCTF Flash CTF Series',
+        subtitle: 'Monthly cybersecurity CTF events',
+        result: 'All-year competitor',
+        period: 'January 2024 - Present',
+        meta: 'Competes in MetaCTF Flash CTF events throughout the year, including the July 2025 Flash CTF certificate event.',
+        achievementUrl: 'N/A',
       },
       {
         title: 'US Cyber Games',
@@ -204,13 +207,7 @@ export const achievementsSections = [
         result: 'Participant',
         period: 'Year to add',
         meta: 'Participated in cybersecurity competition work and blue-team style labs.',
-      },
-      {
-        title: 'MetaCTF Competitions',
-        subtitle: 'Cybersecurity CTF events',
-        result: 'Participant',
-        period: 'Year to add',
-        meta: 'Participated in CTF-style challenges across multiple cybersecurity categories.',
+        achievementUrl: 'N/A',
       },
       {
         title: 'International Youth Math Challenge',
@@ -218,6 +215,7 @@ export const achievementsSections = [
         result: 'Participant',
         period: 'Year to add',
         meta: 'Participated in a global problem-solving competition focused on mathematics and analytical reasoning.',
+        achievementUrl: 'N/A',
       },
       {
         title: 'Cyber Hawks',
@@ -225,6 +223,7 @@ export const achievementsSections = [
         result: 'Participant',
         period: 'Year to add',
         meta: 'Participated in cyber competition preparation, labs, and team-based security practice.',
+        achievementUrl: 'N/A',
       },
       {
         title: 'Local Hackathons',
@@ -232,6 +231,7 @@ export const achievementsSections = [
         result: 'Participant',
         period: 'Year to add',
         meta: 'Participated in local hackathon events focused on building and presenting software projects under time constraints.',
+        achievementUrl: 'N/A',
       },
     ],
   },
