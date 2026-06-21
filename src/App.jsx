@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import {
   about,
   achievementsSections,
+  certifications,
   dockApps,
   educationSections,
   experience,
@@ -757,12 +758,39 @@ function AchievementsWindow() {
             <InfoCard key={item.title}>
               <h3 className="window-card-title">{item.title}</h3>
               {item.subtitle && <p className="window-card-subtitle">{item.subtitle}</p>}
-              {item.meta && <p className="window-card-meta">{item.meta}</p>}
+              {item.result && <p className="window-card-subtitle">{item.result}</p>}
+              {item.period && <p className="window-card-meta">{item.period}</p>}
+              {item.meta && <p className="window-card-text compact-text">{item.meta}</p>}
             </InfoCard>
           ))}
         </div>
       ))}
     </WindowDocument>
+  );
+}
+
+function CertificationCard({ certification }) {
+  const issuedText = certification.issued ? `Issued: ${certification.issued}` : null;
+  const expiresText = certification.expires ? `Expires: ${certification.expires}` : null;
+  const credentialIdText = certification.credentialId ? `Credential ID: ${certification.credentialId}` : null;
+  const details = [issuedText, expiresText, credentialIdText].filter(Boolean).join(' • ');
+
+  return (
+    <InfoCard>
+      <h3 className="window-card-title">{certification.name}</h3>
+      {certification.issuer && <p className="window-card-subtitle">{certification.issuer}</p>}
+      {details && <p className="window-card-meta">{details}</p>}
+      {certification.status && <p className="window-card-meta">Status: {certification.status}</p>}
+      {certification.notes && <p className="window-card-text compact-text">{certification.notes}</p>}
+      {certification.skills?.length > 0 && <SkillChips items={certification.skills} />}
+      {certification.credentialUrl && certification.credentialUrl !== '#' && (
+        <div className="window-link-row">
+          <a href={certification.credentialUrl} target="_blank" rel="noreferrer" className="window-link">
+            View Credential
+          </a>
+        </div>
+      )}
+    </InfoCard>
   );
 }
 
@@ -781,6 +809,15 @@ function EducationWindow() {
           ))}
         </div>
       ))}
+
+      {certifications.length > 0 && (
+        <div>
+          <WindowHeading>Certifications</WindowHeading>
+          {certifications.map((certification) => (
+            <CertificationCard key={`${certification.name}-${certification.issuer}`} certification={certification} />
+          ))}
+        </div>
+      )}
     </WindowDocument>
   );
 }
