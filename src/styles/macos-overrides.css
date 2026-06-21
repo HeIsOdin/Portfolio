@@ -19,6 +19,11 @@
   width: 16px;
   height: 16px;
   display: block;
+  background: url('/icons/dock/apple.svg') center / contain no-repeat;
+}
+
+.apple-logo path {
+  display: none;
 }
 
 .menu-item:hover,
