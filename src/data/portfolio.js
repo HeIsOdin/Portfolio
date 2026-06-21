@@ -117,35 +117,35 @@ export const projects = [
 export const skillCategories = [
   {
     name: 'Languages',
-    items: ['Python', 'JavaScript', 'TypeScript', 'C', 'C++', 'Go', 'SQL', 'HTML', 'CSS'],
+    items: ['Python', 'C/C++', 'Java', 'Typescript', 'C#', 'Go', 'SQL'],
   },
   {
     name: 'Frontend',
-    items: ['React', 'Vite', 'Mantine', 'Tailwind CSS', 'React Router', 'Responsive UI'],
+    items: ['React', 'Angular', 'Vite', 'Mantine', 'Tailwind CSS', 'Bootstrap', 'Lucide UI'],
   },
   {
     name: 'Backend',
-    items: ['Node.js', 'Express.js', 'Flask', 'FastAPI', 'RESTful APIs', 'JWT Auth'],
+    items: ['FastAPI', 'Express.js', 'Go Gin', 'Springboot', 'ORMs', 'JWT Auth'],
   },
   {
     name: 'Databases',
-    items: ['PostgreSQL', 'SQLite', 'MongoDB', 'Redis'],
+    items: ['PostgreSQL', 'MariaDB', 'SQLite', 'MongoDB', 'Redis'],
   },
   {
     name: 'Cloud & DevOps',
-    items: ['Docker', 'GitHub Actions', 'CI/CD', 'Linux', 'Nginx', 'Deployment Automation'],
+    items: ['Docker', 'GitHub Actions', 'Linux', 'Nginx', 'Kubernetes', 'Azure'],
   },
   {
     name: 'AI / Machine Learning',
-    items: ['OpenCV', 'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'Computer Vision', 'Quantum ML'],
+    items: ['OpenCV', 'TensorFlow', 'Scikit-learn', 'Pandas', 'NumPy', 'PyTorch', 'CUDA'],
   },
   {
     name: 'Cybersecurity',
-    items: ['CTFs', 'Network Security', 'Web Security', 'Forensics', 'OSINT', 'Reverse Engineering'],
+    items: ['CTFs', 'Networking', 'Web Security', 'Forensics', 'OSINT', 'Reverse Engineering'],
   },
   {
     name: 'Other',
-    items: ['Git/GitHub', 'Postman', 'Wireshark', 'Technical Writing', 'Team Leadership', 'Mentorship'],
+    items: ['Git', 'Postman', 'Wireshark', 'Technical Writing', 'Team Leadership', 'Mentorship'],
   },
 ];
 
