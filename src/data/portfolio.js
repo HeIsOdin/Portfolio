@@ -159,6 +159,13 @@ export const experience = [
       'Built platform features, improved deployment workflows, and worked on real-time systems for a STEM competition product.',
   },
   {
+    role: 'Peer Tutor',
+    company: 'Dakota State University',
+    period: '2024 - Present',
+    details:
+      'Tutor students in scripting and core computer science problem-solving, adapt explanations, review work, and give actionable feedback on debugging and methodology.',
+  },
+  {
     role: 'Resident Assistant',
     company: 'Dakota State University',
     period: '2025 - Present',
@@ -202,7 +209,7 @@ export const achievementsSections = [
         meta: 'Competed with teams from Dakota State University in a statewide cybersecurity competition.',
         achievementUrl: 'N/A',
       },
-            {
+      {
         title: 'MetaCTF Flash CTF Series',
         subtitle: 'Monthly cybersecurity CTF events',
         result: 'Multiple placements in top 10% of teams',
