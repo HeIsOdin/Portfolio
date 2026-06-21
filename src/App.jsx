@@ -718,7 +718,7 @@ function ProjectsWindow() {
             <ProjectInfoRow label="Created" value={selectedProject.created} />
             <ProjectInfoRow label="Stage" value={selectedProject.stage} />
             {selectedProject.authors?.length > 0 && (
-              <ProjectInfoRow label="Authors">
+              <ProjectInfoRow label="Contributors">
                 <ProjectAuthors authors={selectedProject.authors} />
               </ProjectInfoRow>
             )}

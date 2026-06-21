@@ -27,7 +27,7 @@ function Root() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setIsLoading(false), 3000);
+    const timer = window.setTimeout(() => setIsLoading(false), 2000);
     return () => window.clearTimeout(timer);
   }, []);
 

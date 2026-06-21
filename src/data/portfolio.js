@@ -19,7 +19,7 @@ export const dockApps = [
   { id: 'projects', label: 'Projects', icon: '/icons/dock/projects.svg' },
   { id: 'experience', label: 'Experience', icon: '/icons/dock/experience.svg' },
   { id: 'skills', label: 'Skills', icon: '/icons/dock/skills.svg' },
-  { id: 'achievements', label: 'Achievements', icon: '/icons/dock/contact.svg' },
+  { id: 'achievements', label: 'Achievements', icon: '/icons/dock/achievement.svg' },
   { id: 'education', label: 'Education', icon: '/icons/dock/resume.svg' },
   { id: 'references', label: 'References', icon: '/icons/dock/references.svg' },
 ];
@@ -50,10 +50,6 @@ export const projects = [
     created: 'Spring 2025',
     authors: [
       {
-        name: 'Benjamin Adedowole',
-        link: '#',
-      },
-      {
         name: 'Lawal Victor',
         link: 'https://github.com/lavic001',
       },
@@ -64,7 +60,7 @@ export const projects = [
     ],
     stage: 'Production',
     description: 'Catch and inspect rare Pokémon card misprints using image alignment and eBay-powered crawling.',
-    tags: ['Python', 'OpenCV', 'TensorFlow', 'YOLO', 'Flask'],
+    tags: ['Python', 'OpenCV', 'PyTorch', 'YOLO', 'Flask'],
     links: [
       { label: 'GitHub', href: 'https://github.com/HeIsOdin/Pokemon' },
       { label: 'Demo', href: 'https://pypikachu.oluwajuwon.dev' },
@@ -94,10 +90,6 @@ export const projects = [
     stage: 'Archived',
     authors: [
       {
-        name: 'Benjamin Adedowole',
-        link: '#',
-      },
-      {
         name: 'Muhammad Essa',
         link: 'https://github.com/potterpk',
       },
@@ -108,7 +100,7 @@ export const projects = [
     ],
     description:
       'Terminal-based C/ncurses environment hosting multiple games including Tic-Tac-Toe and Snake Xenzia.',
-    tags: ['C', 'ncurses', 'Linux'],
+    tags: ['C/C++', 'NASM', 'ncurses', 'Linux'],
     links: [
       { label: 'GitHub', href: 'https://github.com/K3RN4LP4N1C/Danger-Dash' },
     ],

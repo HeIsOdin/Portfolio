@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="26" id="victory-flag">
+  <defs>
+    <linearGradient xlink:href="#a" id="b" x1="1056.035" x2="1031.176" y1="544.13" y2="517.701" gradientTransform="translate(-858.774 596.81)scale(.833)" gradientUnits="userSpaceOnUse"></linearGradient>
+    <linearGradient id="a">
+      <stop offset="0" stop-color="#5a5a5a"></stop>
+      <stop offset="1" stop-color="#656e85"></stop>
+    </linearGradient>
+  </defs>
+  <g transform="translate(2 -1026.362)">
+    <rect width="26" height="26" x="-2" y="1026.362" fill="url(#b)" rx="5.495" ry="5.495"></rect>
+    <path fill="#fff" d="M9 1031.362v15H6v1h7v-1h-3v-8h5.5a.5.5 0 0 0 .447-.723l-.889-1.777.889-1.775a.5.5 0 0 0-.448-.725H10v-2z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal"></path>
+  </g>
+</svg>
