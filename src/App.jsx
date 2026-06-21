@@ -769,6 +769,15 @@ function AchievementsWindow() {
   );
 }
 
+function hasCredentialUrl(certification) {
+  return Boolean(
+    certification.credentialUrl &&
+      certification.credentialUrl !== '#' &&
+      certification.credentialUrl !== 'N/A' &&
+      certification.credentialUrl.startsWith('http'),
+  );
+}
+
 function CertificationCard({ certification }) {
   const issuedText = certification.issued ? `Issued: ${certification.issued}` : null;
   const expiresText = certification.expires ? `Expires: ${certification.expires}` : null;
@@ -783,7 +792,7 @@ function CertificationCard({ certification }) {
       {certification.status && <p className="window-card-meta">Status: {certification.status}</p>}
       {certification.notes && <p className="window-card-text compact-text">{certification.notes}</p>}
       {certification.skills?.length > 0 && <SkillChips items={certification.skills} />}
-      {certification.credentialUrl && certification.credentialUrl !== '#' && (
+      {hasCredentialUrl(certification) && (
         <div className="window-link-row">
           <a href={certification.credentialUrl} target="_blank" rel="noreferrer" className="window-link">
             View Credential
