@@ -178,7 +178,7 @@ export const achievementsSections = [
     heading: 'Competitions & Results',
     items: [
       {
-        title: 'NCAE Cyber Games 2026 (Regional and National)',
+        title: 'NCAE Cyber Games 2026',
         subtitle: 'Collegiate cybersecurity competition',
         result: '1st place / 10 teams in Northwest 1, 5th place / 20 teams nationally',
         period: 'April 2026',
@@ -201,15 +201,7 @@ export const achievementsSections = [
         meta: 'Competed with teams from Dakota State University in a statewide cybersecurity competition.',
         achievementUrl: 'N/A',
       },
-      {
-        title: 'HackTheBox University CTF 2024: Binary Badlands',
-        subtitle: 'University CTF competition',
-        result: '305th of 1,128 teams - 7,850 points',
-        period: 'December 2024',
-        meta: 'Competed with team DSU_Trojans and solved 24 of 49 challenges in the HackTheBox University CTF 2024 Binary Badlands event.',
-        achievementUrl: 'https://drive.usercontent.google.com/u/0/uc?id=1wA0d23mCYMwiRIpwmGJjSq3EcmepUU6R',
-      },
-      {
+            {
         title: 'MetaCTF Flash CTF Series',
         subtitle: 'Monthly cybersecurity CTF events',
         result: 'Multiple placements in top 10% of teams',
@@ -224,6 +216,14 @@ export const achievementsSections = [
         period: 'February 2025',
         meta: 'Participated in a global problem-solving competition focused on mathematics and analytical reasoning.',
         achievementUrl: 'https://drive.usercontent.google.com/u/0/uc?id=1-oRWX7APcSUzJ3QtwFoRM9GIMlKOLZcZ',
+      },
+      {
+        title: 'HackTheBox University CTF 2024: Binary Badlands',
+        subtitle: 'University CTF competition',
+        result: '305th of 1,128 teams - 7,850 points',
+        period: 'December 2024',
+        meta: 'Competed with team DSU_Trojans and solved 24 of 49 challenges in the HackTheBox University CTF 2024 Binary Badlands event.',
+        achievementUrl: 'https://drive.usercontent.google.com/u/0/uc?id=1wA0d23mCYMwiRIpwmGJjSq3EcmepUU6R',
       },
       {
         title: 'UND Cyber Hawks',
