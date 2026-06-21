@@ -175,27 +175,63 @@ export const experience = [
 
 export const achievementsSections = [
   {
-    heading: 'Achievements',
+    heading: 'Competitions & Results',
     items: [
       {
-        title: '4.0 GPA',
-        subtitle: 'Dakota State University',
-        meta: 'Maintaining strong academic performance while studying Computer Science and Cyber Operations.',
+        title: 'NCAE Cyber Games Regionals',
+        subtitle: 'Collegiate cybersecurity competition',
+        result: 'Second Runner-Up - Team Placement',
+        period: 'Regional competition',
+        meta: 'Competed with an NCAE Cyber Games team in cyber defense and security-focused challenges.',
       },
       {
-        title: 'PyPikachu Computer Vision Project',
-        subtitle: 'AI-powered card inspection pipeline',
-        meta: 'Built and presented a computer vision workflow for detecting Pokémon card misprints and defects.',
+        title: 'US Cyber Games',
+        subtitle: 'National cybersecurity competition',
+        result: 'Participant',
+        period: 'Year to add',
+        meta: 'Participated in cybersecurity competition work and blue-team style labs.',
       },
       {
-        title: 'K3RN4LP4N1C CTF Competitor',
-        subtitle: 'Cybersecurity competitions',
-        meta: 'Solved challenges across web, crypto, forensics, OSINT, reverse engineering, and binary exploitation.',
+        title: 'HackTheBox University CTF: Binary Badlands',
+        subtitle: 'University CTF competition',
+        result: 'Participant',
+        period: 'Year to add',
+        meta: 'Competed in CTF challenges covering security problem solving and technical exploitation skills.',
       },
       {
-        title: 'Resident Assistant Leadership',
-        subtitle: 'Dakota State University Residence Life',
-        meta: 'Support residents, coordinate communication, respond to incidents, and help build community on campus.',
+        title: 'MetaCTF Competitions',
+        subtitle: 'Cybersecurity CTF events',
+        result: 'Participant',
+        period: 'Year to add',
+        meta: 'Participated in CTF-style challenges across multiple cybersecurity categories.',
+      },
+      {
+        title: 'TryHackMe Advent of Cyber',
+        subtitle: 'Seasonal cybersecurity challenge series',
+        result: 'Participant',
+        period: 'Year to add',
+        meta: 'Worked through hands-on cybersecurity challenges and practical security labs.',
+      },
+      {
+        title: 'International Youth Math Challenge',
+        subtitle: 'International mathematics competition',
+        result: 'Participant',
+        period: 'Year to add',
+        meta: 'Participated in a global problem-solving competition focused on mathematics and analytical reasoning.',
+      },
+      {
+        title: 'Cyber Hawks',
+        subtitle: 'Cybersecurity competition and training group',
+        result: 'Participant',
+        period: 'Year to add',
+        meta: 'Participated in cyber competition preparation, labs, and team-based security practice.',
+      },
+      {
+        title: 'Local Hackathons',
+        subtitle: 'Software building competitions',
+        result: 'Participant',
+        period: 'Year to add',
+        meta: 'Participated in local hackathon events focused on building and presenting software projects under time constraints.',
       },
     ],
   },
@@ -224,6 +260,31 @@ export const educationSections = [
         meta: 'Researching quantum machine learning methods for EV charging cyberattack detection.',
       },
     ],
+  },
+];
+
+export const certifications = [
+  {
+    name: 'Certification Name Placeholder',
+    issuer: 'Issuing Organization Placeholder',
+    issued: 'Month Year',
+    expires: 'Optional expiration date',
+    credentialId: 'Optional credential ID',
+    credentialUrl: '#',
+    status: 'Earned / In progress / Planned',
+    skills: ['Skill placeholder'],
+    notes: 'Add a short note about what this certification validates.',
+  },
+  {
+    name: 'Second Certification Placeholder',
+    issuer: 'Issuer Placeholder',
+    issued: 'Month Year',
+    expires: '',
+    credentialId: '',
+    credentialUrl: '#',
+    status: 'Earned / In progress / Planned',
+    skills: [],
+    notes: '',
   },
 ];
 
