@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   about,
-  contactSections,
+  achievementsSections,
   dockApps,
   educationSections,
   experience,
@@ -16,7 +16,7 @@ const initialWindows = {
   projects: { id: 'projects', title: 'Projects', x: 60, y: 36, w: 960, h: 560, minimized: true, maximized: false },
   skills: { id: 'skills', title: 'Skills', x: 80, y: 36, w: 700, h: 435, minimized: true, maximized: false },
   experience: { id: 'experience', title: 'Experience', x: 80, y: 36, w: 650, h: 435, minimized: true, maximized: false },
-  contact: { id: 'contact', title: 'Contact', x: 80, y: 36, w: 650, h: 435, minimized: true, maximized: false },
+  achievements: { id: 'achievements', title: 'Achievements', x: 80, y: 36, w: 650, h: 435, minimized: true, maximized: false },
   education: { id: 'education', title: 'Education', x: 80, y: 36, w: 650, h: 435, minimized: true, maximized: false },
   references: { id: 'references', title: 'References', x: 77, y: 36, w: 700, h: 435, minimized: true, maximized: false },
 };
@@ -388,7 +388,7 @@ function WindowContent({ id }) {
   if (id === 'projects') return <ProjectsWindow />;
   if (id === 'skills') return <SkillsWindow />;
   if (id === 'experience') return <ExperienceWindow />;
-  if (id === 'contact') return <ContactWindow />;
+  if (id === 'achievements') return <AchievementsWindow />;
   if (id === 'education') return <EducationWindow />;
   if (id === 'references') return <ReferencesWindow />;
   return null;
@@ -416,13 +416,28 @@ function SkillChips({ items = [] }) {
   );
 }
 
+function AboutLinks({ links = [] }) {
+  return (
+    <span className="about-link-list">
+      {links.map((link) => (
+        <a key={link.label} href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="about-meta-link">
+          {link.label}
+        </a>
+      ))}
+    </span>
+  );
+}
+
 function AboutWindow() {
   return (
     <WindowDocument>
       <div className="about-header">
         <h1 className="about-name">{about.name}</h1>
         <p className="about-role">{about.role}</p>
-        <p className="about-location">{about.location}</p>
+        <p className="about-location about-meta-line">
+          <span>{about.location}</span>
+          <AboutLinks links={about.links} />
+        </p>
       </div>
 
       <InfoCard>
@@ -732,21 +747,20 @@ function ExperienceWindow() {
   );
 }
 
-function ContactWindow() {
+function AchievementsWindow() {
   return (
     <WindowDocument>
-      <WindowHeading>Contact Information</WindowHeading>
-      {contactSections.map((section) => (
-        <InfoCard key={section.title}>
-          <h3 className="window-card-title">{section.title}</h3>
-          {section.link ? (
-            <a href={section.link.href} target={section.link.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="window-link">
-              {section.link.label}
-            </a>
-          ) : (
-            <p className="window-card-text compact-text">{section.body}</p>
-          )}
-        </InfoCard>
+      {achievementsSections.map((section) => (
+        <div key={section.heading}>
+          <WindowHeading>{section.heading}</WindowHeading>
+          {section.items.map((item) => (
+            <InfoCard key={item.title}>
+              <h3 className="window-card-title">{item.title}</h3>
+              {item.subtitle && <p className="window-card-subtitle">{item.subtitle}</p>}
+              {item.meta && <p className="window-card-meta">{item.meta}</p>}
+            </InfoCard>
+          ))}
+        </div>
       ))}
     </WindowDocument>
   );
