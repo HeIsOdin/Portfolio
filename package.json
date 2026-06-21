@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
+    "build:cf": "vite build --base=/",
+    "build:gh": "vite build --base=/Portfolio/",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
