@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="trash-bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#9DADAE"/>
+      <stop offset="50%" stop-color="#88999A"/>
+      <stop offset="100%" stop-color="#7A8B8C"/>
+    </linearGradient>
+    <linearGradient id="trash-shine" x1="0.5" y1="0" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.28)"/>
+      <stop offset="45%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#trash-bg)"/>
+  <rect width="64" height="64" rx="14" fill="url(#trash-shine)"/>
+  <path fill="rgba(255,255,255,0.98)" d="M20 22h24v2h4v2H16v-2h4v-2z"/>
+  <path fill="rgba(0,0,0,0.15)" d="M22 22v-2h20v2H22z"/>
+  <rect x="20" y="26" width="24" height="22" rx="2" fill="rgba(255,255,255,0.9)"/>
+  <rect x="26" y="32" width="4" height="12" rx="1" fill="rgba(127,140,141,0.5)"/>
+  <rect x="34" y="32" width="4" height="12" rx="1" fill="rgba(127,140,141,0.5)"/>
+</svg>

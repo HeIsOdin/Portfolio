@@ -1,0 +1,187 @@
+.mac-menu-bar {
+  color: #1d1d1f;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.apple-button,
+.menu-item,
+.menu-status {
+  color: #111827;
+}
+
+.apple-logo {
+  width: 16px;
+  height: 16px;
+  display: block;
+  background: url('/icons/dock/apple.svg') center / contain no-repeat;
+}
+
+.apple-logo path {
+  display: none;
+}
+
+.menu-item:hover,
+.menu-status:hover,
+.apple-button:hover {
+  background: #0000000f;
+}
+
+.profile-card-shell {
+  position: absolute;
+  right: clamp(12px, 2vw, 24px);
+  top: 42px;
+  z-index: 4;
+  width: min(282px, calc(100vw - 24px));
+}
+
+.profile-card-glass,
+.mac-dock-inner {
+  overflow: hidden;
+  border: 1px solid #fff3;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px, rgba(255, 255, 255, 0.15) 0px 1px 0px inset;
+}
+
+.profile-card-glass {
+  overflow: hidden;
+  overflow-y: auto;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition:
+    opacity 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.profile-card-glass:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.profile-card-glass:active {
+  opacity: 0.9;
+}
+
+.profile-card-inner {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.profile-card-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.profile-card-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+}
+
+.profile-card-title {
+  margin-top: 0.125rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.profile-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.375rem;
+  row-gap: 0.125rem;
+  margin-top: 0.25rem;
+}
+
+.profile-card-link {
+  color: rgb(253, 230, 138);
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.profile-card-link:hover {
+  color: rgb(254, 243, 199);
+  text-decoration: underline;
+}
+
+.profile-card-note {
+  margin-top: 0.125rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 9px;
+}
+
+.mac-dock-inner {
+  position: relative;
+  overflow: visible;
+  border-radius: 24px;
+}
+
+.mac-dock-inner::before {
+  display: none;
+}
+
+.dock-icon {
+  z-index: 1;
+  transition: transform .42s cubic-bezier(.34, 1.48, .64, 1), filter .42s ease;
+}
+
+.dock-icon:hover {
+  transform: translateY(-10px) scale(1.25);
+  filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.26));
+}
+
+.dock-divider {
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+@media (min-width: 640px) {
+  .profile-card-inner {
+    gap: 0.625rem;
+    padding: 0.625rem;
+  }
+
+  .profile-card-name {
+    font-size: 13px;
+  }
+
+  .profile-card-title,
+  .profile-card-link {
+    font-size: 11px;
+  }
+
+  .profile-card-links {
+    column-gap: 0.5rem;
+    margin-top: 0.375rem;
+  }
+
+  .profile-card-note {
+    margin-top: 0.25rem;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  .profile-card-shell{
+    position: relative;
+    right: auto;
+    top: auto;
+    width: calc(100vw - 24px);
+    margin: 14px 12px;
+  }
+}

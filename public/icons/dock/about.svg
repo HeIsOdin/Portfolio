@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="about-bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#6BAEF5"/>
+      <stop offset="50%" stop-color="#3E8FDE"/>
+      <stop offset="100%" stop-color="#2A7AC9"/>
+    </linearGradient>
+    <linearGradient id="about-shine" x1="0.5" y1="0" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+      <stop offset="45%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#about-bg)"/>
+  <rect width="64" height="64" rx="14" fill="url(#about-shine)"/>
+  <ellipse cx="32" cy="26" rx="8" ry="9" fill="rgba(255,255,255,0.98)"/>
+  <path fill="rgba(255,255,255,0.98)" d="M20 52c0-6.6 5.4-12 12-12s12 5.4 12 12H20z"/>
+</svg>
