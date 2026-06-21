@@ -185,6 +185,20 @@ export const achievementsSections = [
         meta: 'Competed with an NCAE Cyber Games team in cyber defense and security-focused challenges.',
       },
       {
+        title: 'HackTheBox University CTF 2024: Binary Badlands',
+        subtitle: 'University CTF competition',
+        result: '305th of 1,128 teams - 7,850 points',
+        period: 'December 13-15, 2024',
+        meta: 'Competed with team DSU_Trojans and solved 24 of 49 challenges in the HackTheBox University CTF 2024 Binary Badlands event.',
+      },
+      {
+        title: 'July 2025 MetaCTF Flash CTF',
+        subtitle: 'Two-hour cybersecurity CTF',
+        result: 'Certificate of Participation',
+        period: 'July 24, 2025',
+        meta: 'Competed in the July 2025 MetaCTF Flash CTF, a timed cybersecurity challenge event.',
+      },
+      {
         title: 'US Cyber Games',
         subtitle: 'National cybersecurity competition',
         result: 'Participant',
@@ -192,25 +206,11 @@ export const achievementsSections = [
         meta: 'Participated in cybersecurity competition work and blue-team style labs.',
       },
       {
-        title: 'HackTheBox University CTF: Binary Badlands',
-        subtitle: 'University CTF competition',
-        result: 'Participant',
-        period: 'Year to add',
-        meta: 'Competed in CTF challenges covering security problem solving and technical exploitation skills.',
-      },
-      {
         title: 'MetaCTF Competitions',
         subtitle: 'Cybersecurity CTF events',
         result: 'Participant',
         period: 'Year to add',
         meta: 'Participated in CTF-style challenges across multiple cybersecurity categories.',
-      },
-      {
-        title: 'TryHackMe Advent of Cyber',
-        subtitle: 'Seasonal cybersecurity challenge series',
-        result: 'Participant',
-        period: 'Year to add',
-        meta: 'Worked through hands-on cybersecurity challenges and practical security labs.',
       },
       {
         title: 'International Youth Math Challenge',
@@ -264,28 +264,6 @@ export const educationSections = [
 ];
 
 export const certifications = [
-  {
-    name: 'HackTheBox University CTF 2024: Binary Badlands',
-    issuer: 'Hack The Box',
-    issued: 'N/A',
-    expires: 'N/A',
-    credentialId: 'N/A',
-    credentialUrl: 'N/A',
-    status: 'Certificate of Participation',
-    skills: ['CTF', 'Cybersecurity', 'Team Competition'],
-    notes: 'Team DSU_Trojans ranked 305th of 1,128 teams, solved 24/49 challenges, and earned 7,850 points. CTF date: 13/12/2024 - 15/12/2024.',
-  },
-  {
-    name: 'July 2025 MetaCTF Flash CTF',
-    issuer: 'MetaCTF',
-    issued: 'July 24, 2025',
-    expires: 'N/A',
-    credentialId: 'N/A',
-    credentialUrl: 'N/A',
-    status: 'Certificate of Participation',
-    skills: ['CTF', 'Cybersecurity', 'Problem Solving'],
-    notes: 'Completed the July 2025 MetaCTF Flash CTF, a two-hour cybersecurity competition.',
-  },
   {
     name: 'Advent of Cyber 2024',
     issuer: 'TryHackMe',
