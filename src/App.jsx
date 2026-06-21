@@ -25,6 +25,10 @@ const initialWindows = {
 const menuItems = ['File', 'Edit', 'View', 'Tools', 'Window', 'Help'];
 const imageFilePattern = /\.(png|jpe?g|webp|gif|svg)$/i;
 
+function hasExternalUrl(value) {
+  return Boolean(value && value !== '#' && value !== 'N/A' && value.startsWith('http'));
+}
+
 function getProjectTags(project) {
   return project.tags ?? project.stack ?? [];
 }
@@ -517,7 +521,7 @@ function ExternalLinkIcon() {
 }
 
 function ProjectTitleLinks({ links = [] }) {
-  const projectLinks = links.filter((link) => link?.href && link.href !== '#');
+  const projectLinks = links.filter((link) => link?.href && link.href !== '#' && link.href !== 'N/A');
 
   if (!projectLinks.length) return null;
 
@@ -748,6 +752,35 @@ function ExperienceWindow() {
   );
 }
 
+function getAchievementUrl(achievement) {
+  return achievement.achievementUrl ?? achievement.evidenceUrl ?? achievement.documentUrl ?? achievement.imageUrl ?? achievement.link;
+}
+
+function hasAchievementUrl(achievement) {
+  return hasExternalUrl(getAchievementUrl(achievement));
+}
+
+function AchievementCard({ achievement }) {
+  const achievementUrl = getAchievementUrl(achievement);
+
+  return (
+    <InfoCard>
+      <h3 className="window-card-title">{achievement.title}</h3>
+      {achievement.subtitle && <p className="window-card-subtitle">{achievement.subtitle}</p>}
+      {achievement.result && <p className="window-card-subtitle">{achievement.result}</p>}
+      {achievement.period && <p className="window-card-meta">{achievement.period}</p>}
+      {achievement.meta && <p className="window-card-text compact-text">{achievement.meta}</p>}
+      {hasAchievementUrl(achievement) && (
+        <div className="window-link-row">
+          <a href={achievementUrl} target="_blank" rel="noreferrer" className="window-link">
+            View Achievement
+          </a>
+        </div>
+      )}
+    </InfoCard>
+  );
+}
+
 function AchievementsWindow() {
   return (
     <WindowDocument>
@@ -755,13 +788,7 @@ function AchievementsWindow() {
         <div key={section.heading}>
           <WindowHeading>{section.heading}</WindowHeading>
           {section.items.map((item) => (
-            <InfoCard key={item.title}>
-              <h3 className="window-card-title">{item.title}</h3>
-              {item.subtitle && <p className="window-card-subtitle">{item.subtitle}</p>}
-              {item.result && <p className="window-card-subtitle">{item.result}</p>}
-              {item.period && <p className="window-card-meta">{item.period}</p>}
-              {item.meta && <p className="window-card-text compact-text">{item.meta}</p>}
-            </InfoCard>
+            <AchievementCard key={item.title} achievement={item} />
           ))}
         </div>
       ))}
@@ -770,12 +797,7 @@ function AchievementsWindow() {
 }
 
 function hasCredentialUrl(certification) {
-  return Boolean(
-    certification.credentialUrl &&
-      certification.credentialUrl !== '#' &&
-      certification.credentialUrl !== 'N/A' &&
-      certification.credentialUrl.startsWith('http'),
-  );
+  return hasExternalUrl(certification.credentialUrl);
 }
 
 function CertificationCard({ certification }) {
