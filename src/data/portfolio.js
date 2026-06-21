@@ -18,7 +18,7 @@ export const dockApps = [
   { id: 'projects', label: 'Projects', icon: '/icons/dock/projects.svg' },
   { id: 'experience', label: 'Experience', icon: '/icons/dock/experience.svg' },
   { id: 'skills', label: 'Skills', icon: '/icons/dock/skills.svg' },
-  { id: 'contact', label: 'Contact', icon: '/icons/dock/contact.svg' },
+  { id: 'achievements', label: 'Achievements', icon: '/icons/dock/contact.svg' },
   { id: 'education', label: 'Education', icon: '/icons/dock/resume.svg' },
   { id: 'references', label: 'References', icon: '/icons/dock/references.svg' },
 ];
@@ -27,6 +27,12 @@ export const about = {
   name: 'Benjamin Adedowole',
   role: 'AI/ML and Cybersecurity Student',
   location: 'Dakota State University',
+  links: [
+    { label: 'Email', href: `mailto:${profile.email}` },
+    { label: 'GitHub', href: profile.github },
+    { label: 'LinkedIn', href: profile.linkedin },
+    { label: 'Discord', href: 'https://discordapp.com/users/heisodin' },
+  ],
   paragraphs: [
     'I am a Computer Science and Cyber Operations student at Dakota State University with hands-on experience building full-stack software, cybersecurity tools, and machine learning projects. I enjoy creating practical systems that combine clean interfaces, secure design, and useful automation.',
     'I have worked on projects ranging from computer vision for Pokémon card misprint detection to authentication services, React platforms, CTF tooling, and research involving quantum machine learning for cyberattack detection. My interests sit at the intersection of AI, cybersecurity, full-stack engineering, and problem solving.',
@@ -41,18 +47,20 @@ export const projects = [
     subtitle: 'AI-Powered Pokémon Card Defect Detection',
     kind: 'ML & CV pipeline',
     created: 'Spring 2025',
-    authors: [{
-      name: 'Benjamin Adedowole',
-      link: '#'
-    },
-    {
-      name: 'Lawal Victor',
-      link: '#'
-    },
-    {
-      name: 'Jessica Senyah',
-      link: '#'
-    }],
+    authors: [
+      {
+        name: 'Benjamin Adedowole',
+        link: '#',
+      },
+      {
+        name: 'Lawal Victor',
+        link: '#',
+      },
+      {
+        name: 'Jessica Senyah',
+        link: '#',
+      },
+    ],
     stage: 'Production',
     description: 'Catch and inspect rare Pokémon card misprints using image alignment and eBay-powered crawling.',
     tags: ['Python', 'OpenCV', 'TensorFlow', 'YOLO', 'Flask'],
@@ -83,18 +91,20 @@ export const projects = [
     kind: 'Systems Programming Project',
     created: '2024',
     stage: 'Archived',
-    authors: [{
-      name: 'Benjamin Adedowole',
-      link: '#'
-    },
-    {
-      name: 'Muhammad Essa',
-      link: '#'
-    },
-    {
-      name: 'Ethan Weyer',
-      link: '#'
-    }],
+    authors: [
+      {
+        name: 'Benjamin Adedowole',
+        link: '#',
+      },
+      {
+        name: 'Muhammad Essa',
+        link: '#',
+      },
+      {
+        name: 'Ethan Weyer',
+        link: '#',
+      },
+    ],
     description:
       'Terminal-based C/ncurses environment hosting multiple games including Tic-Tac-Toe and Snake Xenzia.',
     tags: ['C', 'ncurses', 'Linux'],
@@ -163,27 +173,32 @@ export const experience = [
   },
 ];
 
-export const contactSections = [
+export const achievementsSections = [
   {
-    title: 'Location',
-    body: profile.location,
+    heading: 'Achievements',
+    items: [
+      {
+        title: '4.0 GPA',
+        subtitle: 'Dakota State University',
+        meta: 'Maintaining strong academic performance while studying Computer Science and Cyber Operations.',
+      },
+      {
+        title: 'PyPikachu Computer Vision Project',
+        subtitle: 'AI-powered card inspection pipeline',
+        meta: 'Built and presented a computer vision workflow for detecting Pokémon card misprints and defects.',
+      },
+      {
+        title: 'K3RN4LP4N1C CTF Competitor',
+        subtitle: 'Cybersecurity competitions',
+        meta: 'Solved challenges across web, crypto, forensics, OSINT, reverse engineering, and binary exploitation.',
+      },
+      {
+        title: 'Resident Assistant Leadership',
+        subtitle: 'Dakota State University Residence Life',
+        meta: 'Support residents, coordinate communication, respond to incidents, and help build community on campus.',
+      },
+    ],
   },
-  {
-    title: 'Email',
-    link: { label: 'benjaminadedowole@gmail.com', href: 'mailto:benjaminadedowole@gmail.com' },
-  },
-  {
-    title: 'GitHub',
-    link: { label: 'HeIsOdin', href: profile.github },
-  },
-  {
-    title: 'LinkedIn',
-    link: { label: 'Benjamin Ade', href: profile.linkedin },
-  },
-  {
-    title: 'Discord',
-    link: { label: 'heisodin', href: 'https://discordapp.com/users/heisodin' },
-  }
 ];
 
 export const educationSections = [
