@@ -1207,19 +1207,6 @@ button {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .loading-screen-logo,
-  .loading-screen-bar,
-  .loading-screen-bar-fill,
-  .mac-window {
-    animation: none;
-  }
-
-  .loading-screen-bar-fill {
-    transform: translateX(75%);
-  }
-}
-
 @media (min-width: 640px) {
   .profile-card-inner {
     gap: 0.625rem;
