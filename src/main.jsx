@@ -3,10 +3,6 @@ import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
 import './styles/index.css';
 import './styles/macos-overrides.css';
-import './styles/about-window.css';
-import './styles/project-gallery.css';
-import './styles/project-gallery-media.css';
-import './styles/loading-screen.css';
 
 function LoadingScreen() {
   return (
