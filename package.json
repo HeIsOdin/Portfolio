@@ -8,20 +8,17 @@
     "build": "vite build",
     "build:cf": "vite build --base=/",
     "build:gh": "vite build --base=/Portfolio/",
-    "preview": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
+    "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
+    "vite": "latest",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "vite": "latest"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.42.1",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
-    "wrangler": "^4.103.0"
+    "postcss": "^8.5.1",
+    "autoprefixer": "^10.4.20"
   }
 }
