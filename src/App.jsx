@@ -24,9 +24,28 @@ const initialWindows = {
 
 const menuItems = ['File', 'Edit', 'View', 'Tools', 'Window', 'Help'];
 const imageFilePattern = /\.(png|jpe?g|webp|gif|svg)$/i;
+const mobileQuery = '(max-width: 760px)';
 
 function hasExternalUrl(value) {
   return Boolean(value && value !== '#' && value !== 'N/A' && value.startsWith('http'));
+}
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia(mobileQuery).matches;
+  });
+
+  useEffect(() => {
+    const media = window.matchMedia(mobileQuery);
+    const update = () => setIsMobile(media.matches);
+
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+
+  return isMobile;
 }
 
 function getProjectTags(project) {
@@ -105,12 +124,7 @@ async function fetchProjectHealth(endpoint, signal) {
     const hasExpectedShape = hasHealthResponseShape(data);
 
     if (response.status === 404 && !hasExpectedShape) {
-      return {
-        status: 'down',
-        message: 'Project is currently down',
-        endpoint,
-        items: [],
-      };
+      return { status: 'down', message: 'Project is currently down', endpoint, items: [] };
     }
 
     if (!hasExpectedShape) {
@@ -131,11 +145,7 @@ async function fetchProjectHealth(endpoint, signal) {
       return null;
     });
 
-    const items = checklist.map((label, index) => ({
-      label,
-      value: checks[index] ?? null,
-    }));
-
+    const items = checklist.map((label, index) => ({ label, value: checks[index] ?? null }));
     let status = 'healthy';
     let message = 'All checks passed';
 
@@ -147,27 +157,15 @@ async function fetchProjectHealth(endpoint, signal) {
       message = 'Unable to determine every check';
     }
 
-    return {
-      status,
-      message,
-      endpoint,
-      items,
-    };
+    return { status, message, endpoint, items };
   } catch (error) {
-    if (error.name === 'AbortError') {
-      return null;
-    }
-
-    return {
-      status: 'unknown',
-      message: 'Unable to determine project health',
-      endpoint,
-      items: [],
-    };
+    if (error.name === 'AbortError') return null;
+    return { status: 'unknown', message: 'Unable to determine project health', endpoint, items: [] };
   }
 }
 
 function App() {
+  const isMobile = useIsMobile();
   const [windows, setWindows] = useState(initialWindows);
   const [activeWindow, setActiveWindow] = useState('about');
   const [profileOpen, setProfileOpen] = useState(true);
@@ -213,6 +211,10 @@ function App() {
     }));
   }
 
+  if (isMobile) {
+    return <MobileApp time={time} />;
+  }
+
   return (
     <main className="app-root mac-desktop">
       <MenuBar time={time} onProfileToggle={() => setProfileOpen((value) => !value)} />
@@ -242,6 +244,74 @@ function App() {
   );
 }
 
+function MobileApp({ time }) {
+  const [activeApp, setActiveApp] = useState(null);
+  const formattedTime = time.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+  function openMobileApp(app) {
+    setActiveApp(app);
+  }
+
+  return (
+    <main className={`app-root mac-desktop mobile-home ${activeApp ? 'mobile-home-has-sheet' : ''}`}>
+      <MobileStatusBar time={formattedTime} />
+
+      <section className="mobile-home-canvas" aria-label="iOS style portfolio home screen">
+        <ProfileCard onOpen={() => openMobileApp(dockApps.find((app) => app.id === 'about'))} />
+        <MobileAppGrid apps={dockApps} onOpen={openMobileApp} />
+        <div className="mobile-home-indicator" aria-hidden="true" />
+      </section>
+
+      <MobileWindowSheet app={activeApp} onClose={() => setActiveApp(null)} />
+    </main>
+  );
+}
+
+function MobileStatusBar({ time }) {
+  return (
+    <header className="mobile-status-bar" aria-label="Mobile status bar">
+      <span>{time}</span>
+      <span className="mobile-status-reserved" aria-hidden="true" />
+    </header>
+  );
+}
+
+function MobileAppGrid({ apps, onOpen }) {
+  return (
+    <nav className="mobile-app-grid" aria-label="Portfolio apps">
+      {apps.map((app) => (
+        <button key={app.id} className="mobile-app-tile" type="button" onClick={() => onOpen(app)}>
+          <span className="mobile-app-icon-wrap">
+            <img src={app.icon} alt="" />
+          </span>
+          <span className="mobile-app-label">{app.label}</span>
+        </button>
+      ))}
+    </nav>
+  );
+}
+
+function MobileWindowSheet({ app, onClose }) {
+  if (!app) return null;
+
+  return (
+    <div className="mobile-sheet-layer" role="presentation">
+      <button className="mobile-sheet-scrim" type="button" aria-label="Close window" onClick={onClose} />
+      <section className="mobile-window-sheet" role="dialog" aria-modal="true" aria-label={app.label}>
+        <div className="mobile-sheet-grabber" aria-hidden="true" />
+        <header className="mobile-sheet-header">
+          <button type="button" className="mobile-sheet-done" onClick={onClose}>Done</button>
+          <h1>{app.label}</h1>
+          <span aria-hidden="true" />
+        </header>
+        <div className="mobile-sheet-content">
+          <WindowContent id={app.id} />
+        </div>
+      </section>
+    </div>
+  );
+}
+
 function MenuBar({ time, onProfileToggle }) {
   const formattedTime = time.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
   const formattedDate = time.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
@@ -250,7 +320,7 @@ function MenuBar({ time, onProfileToggle }) {
     <header className="mac-menu-bar">
       <div className="mac-menu-left">
         <button className="apple-button" type="button" aria-label="Apple menu">
-          <AppleLogo />
+          <span className="apple-logo" aria-hidden="true" />
         </button>
         {menuItems.map((item) => (
           <button key={item} className="menu-item" type="button">
@@ -266,17 +336,17 @@ function MenuBar({ time, onProfileToggle }) {
   );
 }
 
-function AppleLogo({ className = '' }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={`apple-logo w-4 h-4 ${className}`} aria-hidden="true">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-    </svg>
-  );
-}
+function ProfileCard({ appWindow, showProfile, onOpen }) {
+  const openProfile = () => {
+    if (onOpen) {
+      onOpen();
+      return;
+    }
+    showProfile?.(appWindow);
+  };
 
-function ProfileCard({ appWindow, showProfile }) {
   return (
-    <aside className="profile-card-shell" aria-label="Profile summary" onClick={() => showProfile(appWindow)}>
+    <aside className="profile-card-shell" aria-label="Profile summary" onClick={openProfile}>
       <div role="button" tabIndex={0} className="profile-card-glass">
         <div className="profile-card-inner">
           <div className="profile-card-copy">
@@ -503,32 +573,6 @@ function ProjectPreview({ project, isThumbnail = false }) {
   );
 }
 
-function GitHubIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path
-        fill="currentColor"
-        d="M12 2C6.48 2 2 6.59 2 12.25c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.36 1.12 2.94.86.09-.67.35-1.12.64-1.38-2.22-.26-4.55-1.14-4.55-5.05 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.31.1-2.71 0 0 .84-.28 2.75 1.05.8-.23 1.65-.34 2.5-.34s1.7.11 2.5.34c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.92-2.34 4.79-4.57 5.04.36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85 0 .27.18.59.69.49A10.12 10.12 0 0 0 22 12.25C22 6.59 17.52 2 12 2Z"
-      />
-    </svg>
-  );
-}
-
-function ExternalLinkIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M7 17 17 7m0 0H9m8 0v8"
-      />
-    </svg>
-  );
-}
-
 function ProjectTitleLinks({ links = [] }) {
   const projectLinks = links.filter((link) => link?.href && link.href !== '#' && link.href !== 'N/A');
 
@@ -547,9 +591,7 @@ function ProjectTitleLinks({ links = [] }) {
             className={`project-title-link ${isGitHub ? 'project-title-link-github' : 'project-title-link-live'}`}
             aria-label={`${link.label} for ${link.href}`}
             title={link.label}
-          >
-            {isGitHub ? <GitHubIcon /> : <ExternalLinkIcon />}
-          </a>
+          />
         );
       })}
     </div>
