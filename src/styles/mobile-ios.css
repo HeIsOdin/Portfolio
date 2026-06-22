@@ -1,0 +1,495 @@
+/*
+  Mobile-only iOS-style layout.
+  Desktop styling remains in macos-overrides.css; this file only controls
+  the phone home screen, icon grid, and bottom-sheet windows.
+*/
+
+@media (max-width: 760px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .mobile-home {
+    position: relative;
+    width: 100vw;
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+    color: #fff;
+    background-position: center;
+  }
+
+  .mobile-home::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(180deg, rgba(3, 7, 18, 0.2), rgba(3, 7, 18, 0.03) 44%, rgba(3, 7, 18, 0.18)),
+      radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 0.18), transparent 34%);
+    pointer-events: none;
+  }
+
+  .mobile-home-has-sheet::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: rgba(4, 9, 20, 0.52);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    pointer-events: none;
+  }
+
+  .mobile-status-bar {
+    position: absolute;
+    top: max(12px, env(safe-area-inset-top));
+    left: 0;
+    right: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 34px;
+    color: #fff;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    pointer-events: none;
+  }
+
+  .mobile-status-reserved {
+    width: 120px;
+    height: 24px;
+  }
+
+  .mobile-home-canvas {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    padding: 86px 24px calc(44px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-home .profile-card-shell {
+    position: absolute;
+    top: max(90px, calc(env(safe-area-inset-top) + 76px));
+    right: 20px;
+    left: auto;
+    width: min(282px, calc(100vw - 122px)) !important;
+    min-width: 238px;
+    margin: 0;
+    z-index: 3;
+  }
+
+  .mobile-home .profile-card-glass {
+    border: 1px solid #fff3;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 8px 24px, rgba(255, 255, 255, 0.15) 0 1px 0 inset;
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+  }
+
+  .mobile-home .profile-card-inner {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .mobile-home .profile-card-name {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: normal;
+  }
+
+  .mobile-home .profile-card-title {
+    margin-top: 0.125rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  .mobile-home .profile-card-links {
+    margin-top: 0.25rem;
+    column-gap: 0.375rem;
+    row-gap: 0.125rem;
+  }
+
+  .mobile-home .profile-card-link {
+    color: rgb(253, 230, 138);
+    font-size: 10px;
+    font-weight: 400;
+  }
+
+  .mobile-home .profile-card-note {
+    margin-top: 0.125rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 9px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-app-grid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(82px + env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px 18px;
+    padding: 0 28px;
+  }
+
+  .mobile-app-tile {
+    min-width: 0;
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .mobile-app-icon-wrap {
+    width: clamp(66px, 13.5vw, 86px);
+    height: clamp(66px, 13.5vw, 86px);
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2));
+  }
+
+  .mobile-app-icon-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+
+  .mobile-app-label {
+    max-width: 100%;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-home-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    width: 142px;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.65);
+    transform: translateX(-50%);
+  }
+
+  .mobile-sheet-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .mobile-sheet-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border: 0;
+    background: rgba(4, 9, 20, 0.56);
+  }
+
+  .mobile-window-sheet {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: min(74dvh, 760px);
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 28px 28px 0 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #1d1d1f;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.32);
+    animation: mobile-sheet-open 360ms cubic-bezier(.2, .9, .2, 1) both;
+  }
+
+  .mobile-sheet-grabber {
+    position: absolute;
+    top: 13px;
+    left: 50%;
+    z-index: 2;
+    width: 62px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(60, 60, 67, 0.24);
+    transform: translateX(-50%);
+  }
+
+  .mobile-sheet-header {
+    height: 80px;
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 28px 0;
+    border-bottom: 1px solid rgba(60, 60, 67, 0.14);
+    background: rgba(255, 255, 255, 0.96);
+  }
+
+  .mobile-sheet-header h1 {
+    margin: 0;
+    color: #1d1d1f;
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .mobile-sheet-done {
+    justify-self: start;
+    padding: 0;
+    color: rgb(0, 122, 255);
+    background: transparent;
+    font-size: 25px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .mobile-sheet-content {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .mobile-window-sheet .window-document {
+    height: 100%;
+    overflow-y: auto;
+    padding: 26px 28px calc(28px + env(safe-area-inset-bottom));
+    background: #fff;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .mobile-window-sheet .window-heading {
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .mobile-window-sheet .about-header {
+    margin-bottom: 28px;
+  }
+
+  .mobile-window-sheet .about-name {
+    font-size: 30px;
+    line-height: 1.1;
+  }
+
+  .mobile-window-sheet .about-role {
+    font-size: 22px;
+  }
+
+  .mobile-window-sheet .about-location,
+  .mobile-window-sheet .about-meta-link {
+    font-size: 17px;
+  }
+
+  .mobile-window-sheet .window-card {
+    margin-bottom: 22px;
+    padding: 24px 28px;
+    border-radius: 18px;
+    background: rgba(242, 242, 247, 0.78);
+    border-color: rgba(60, 60, 67, 0.15);
+  }
+
+  .mobile-window-sheet .window-card-title {
+    font-size: 21px;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+
+  .mobile-window-sheet .window-card-subtitle {
+    font-size: 18px;
+  }
+
+  .mobile-window-sheet .window-card-meta {
+    font-size: 16px;
+  }
+
+  .mobile-window-sheet .window-card-text {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+
+  .mobile-window-sheet .skill-chip-row {
+    margin-top: 16px;
+  }
+
+  .mobile-window-sheet .skill-chip {
+    margin-right: 7px;
+    margin-bottom: 10px;
+    padding: 9px 16px;
+    border-radius: 10px;
+    background: rgba(60, 60, 67, 0.08);
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+  .mobile-window-sheet .window-link {
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .mobile-window-sheet .project-gallery-view {
+    display: block;
+    height: auto;
+    min-height: 100%;
+    overflow: visible;
+    background: #fff;
+  }
+
+  .mobile-window-sheet .project-gallery-main {
+    min-height: auto;
+    display: block;
+    border-right: 0;
+    border-bottom: 1px solid rgba(60, 60, 67, 0.14);
+    background: #fff;
+  }
+
+  .mobile-window-sheet .project-preview-stage {
+    padding: 0 0 20px;
+  }
+
+  .mobile-window-sheet .project-preview {
+    border-radius: 20px;
+  }
+
+  .mobile-window-sheet .project-filmstrip {
+    padding: 14px 0 18px;
+    background: #fff;
+  }
+
+  .mobile-window-sheet .project-inspector {
+    overflow: visible;
+    padding: 24px 0 0;
+    background: #fff;
+  }
+
+  .mobile-window-sheet .project-inspector-header h2 {
+    font-size: 26px;
+  }
+
+  .mobile-window-sheet .project-inspector-header p,
+  .mobile-window-sheet .project-info-section p {
+    font-size: 16px;
+  }
+
+  .mobile-window-sheet .project-info-section h3,
+  .mobile-window-sheet .project-info-heading h3 {
+    font-size: 20px;
+  }
+
+  .mobile-window-sheet .project-info-row span,
+  .mobile-window-sheet .project-info-row strong,
+  .mobile-window-sheet .project-info-value,
+  .mobile-window-sheet .project-author-link,
+  .mobile-window-sheet .project-author-name {
+    font-size: 15px;
+  }
+
+  @keyframes mobile-sheet-open {
+    from {
+      opacity: 0;
+      transform: translateY(18%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .mobile-status-bar {
+    padding: 0 24px;
+    font-size: 22px;
+  }
+
+  .mobile-home .profile-card-shell {
+    right: 16px;
+    width: min(282px, calc(100vw - 112px)) !important;
+  }
+
+  .mobile-home .profile-card-inner {
+    padding: 0.5rem;
+  }
+
+  .mobile-home .profile-card-name {
+    font-size: 12px;
+  }
+
+  .mobile-home .profile-card-title,
+  .mobile-home .profile-card-link {
+    font-size: 10px;
+  }
+
+  .mobile-app-grid {
+    gap: 18px 12px;
+    padding: 0 22px;
+  }
+
+  .mobile-app-label {
+    font-size: 15px;
+  }
+
+  .mobile-window-sheet {
+    height: 76dvh;
+    min-height: 500px;
+  }
+
+  .mobile-sheet-header h1 {
+    font-size: 24px;
+  }
+
+  .mobile-sheet-done {
+    font-size: 22px;
+  }
+
+  .mobile-window-sheet .window-document {
+    padding: 24px 22px calc(26px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-window-sheet .window-card-text {
+    font-size: 18px;
+  }
+
+  .mobile-window-sheet .skill-chip {
+    font-size: 16px;
+  }
+}
